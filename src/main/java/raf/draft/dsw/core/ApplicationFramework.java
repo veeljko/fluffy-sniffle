@@ -4,13 +4,20 @@ import raf.draft.dsw.gui.swing.MainFrame;
 
 public class ApplicationFramework {
     //buduca polja za model celog projekta
+    private MainFrame mainFrame;
+    private ApplicationFramework instance = null;
 
-    public ApplicationFramework(){
-        initialize();
+    private ApplicationFramework(){
+        if (instance == null) initialize();
     }
 
     public void initialize(){
-        MainFrame mainFrame = new MainFrame();
+        mainFrame = MainFrame.getInstance();
         mainFrame.setVisible(true);
+    }
+
+    public static ApplicationFramework getInstance(){
+        ApplicationFramework applicationFramework = new ApplicationFramework();
+        return applicationFramework;
     }
 }
