@@ -5,10 +5,10 @@ import raf.draft.dsw.gui.swing.MainFrame;
 public class ApplicationFramework {
     //buduca polja za model celog projekta
     private MainFrame mainFrame;
-    private ApplicationFramework instance = null;
+    private static ApplicationFramework instance = null;
 
     private ApplicationFramework(){
-        if (instance == null) initialize();
+        initialize();
     }
 
     public void initialize(){
@@ -17,7 +17,7 @@ public class ApplicationFramework {
     }
 
     public static ApplicationFramework getInstance(){
-        ApplicationFramework applicationFramework = new ApplicationFramework();
-        return applicationFramework;
+        if (instance == null) instance = new ApplicationFramework();
+        return instance;
     }
 }
