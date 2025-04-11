@@ -1,13 +1,17 @@
 package raf.draft.dsw.gui.swing;
 
+import raf.draft.dsw.core.ActionManager;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
     //buduca polja za sve komponente view-a na glavnom prozoru
-    private static MainFrame instance = null;
+    private static MainFrame instance;
+    private ActionManager actionManager;
 
     private MainFrame(){
+        this.actionManager = new ActionManager();
         initialize();
     }
 
@@ -21,8 +25,8 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("DraftRoom");
 
-        MyMenuBar menu = new MyMenuBar();
-        setJMenuBar(menu);
+        MyMenuBar menuBar = new MyMenuBar();
+        setJMenuBar(menuBar);
 
         MyToolBar toolBar = new MyToolBar();
         add(toolBar, BorderLayout.NORTH);
@@ -31,5 +35,9 @@ public class MainFrame extends JFrame {
     public static MainFrame getInstance(){
         if (instance == null) instance = new MainFrame();
         return instance;
+    }
+
+    public ActionManager getActionManager() {
+        return actionManager;
     }
 }
