@@ -8,13 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.net.URL;
 
-public class ExitAction extends AbstractRoomAction {
-    public ExitAction(){
+public class AboutUsAction extends AbstractRoomAction {
+    public AboutUsAction(){
         //bitno
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F4, ActionEvent.ALT_MASK));
         putValue(SMALL_ICON, super.loadIcon("/images/exit.png"));
-        putValue(NAME, "Exit");
-        putValue(SHORT_DESCRIPTION, "Exit");
+        putValue(NAME, "About Us");
+        putValue(SHORT_DESCRIPTION, "About Us");
     }
 
 //    //deo koda za ucitavanje ikonice...
@@ -36,6 +36,14 @@ public class ExitAction extends AbstractRoomAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.exit(0);
+        JFrame frame = new JFrame("Novi Prozor");
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+
+        JLabel label = new JLabel("Dobrodošli u novi prozor!", SwingConstants.CENTER);
+        frame.add(label, BorderLayout.CENTER);
+
+        frame.setVisible(true);
     }
 }
