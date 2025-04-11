@@ -5,37 +5,31 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
     //buduca polja za sve komponente view-a na glavnom prozoru
-    private Toolkit kit;
-    private Dimension screenSize;
-    private MyMenuBar menu;
-    private MyToolBar toolBar;
-    private int screenHeight;
-    private int screenWidth;
-    private MainFrame instance = null;
+    private static MainFrame instance = null;
 
     private MainFrame(){
-        if (instance == null) initialize();
+        initialize();
     }
 
     private void initialize(){
-        kit = Toolkit.getDefaultToolkit();
-        screenSize = kit.getScreenSize();
-        screenHeight = screenSize.height;
-        screenWidth = screenSize.width;
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = kit.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
         setSize(screenWidth / 2, screenHeight / 2);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("DraftRoom");
 
-        menu = new MyMenuBar();
+        MyMenuBar menu = new MyMenuBar();
         setJMenuBar(menu);
 
-        toolBar = new MyToolBar();
+        MyToolBar toolBar = new MyToolBar();
         add(toolBar, BorderLayout.NORTH);
     }
 
     public static MainFrame getInstance(){
-        MainFrame frame = new MainFrame();
-        return frame;
+        if (instance == null) instance = new MainFrame();
+        return instance;
     }
 }
