@@ -23,7 +23,6 @@ public class MessageGenerator extends IPublisher{
         System.out.println(getSubscriberList().size());
         for (ISubscriber log : getSubscriberList()){
             log.update(toString());
-            System.out.println("poslata noticikacija");
         }
     }
 

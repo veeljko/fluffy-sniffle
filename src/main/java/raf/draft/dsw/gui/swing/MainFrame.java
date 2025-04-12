@@ -1,11 +1,12 @@
 package raf.draft.dsw.gui.swing;
 
 import raf.draft.dsw.core.ActionManager;
+import raf.draft.dsw.errorhandler.ISubscriber;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ISubscriber {
     //buduca polja za sve komponente view-a na glavnom prozoru
     private static MainFrame instance;
     private ActionManager actionManager;
@@ -39,5 +40,10 @@ public class MainFrame extends JFrame {
 
     public ActionManager getActionManager() {
         return actionManager;
+    }
+
+    @Override
+    public void update(String message) {
+        JOptionPane.showMessageDialog(null, "Uneta poruka: " + message, "Prikaz poruke", JOptionPane.INFORMATION_MESSAGE);
     }
 }
