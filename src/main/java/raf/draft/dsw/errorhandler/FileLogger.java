@@ -7,7 +7,7 @@ public class FileLogger implements Logger{
     @Override
     public void log(String message) {
         try {
-            FileWriter writer = new FileWriter("C:\\Users\\Korisnik\\IdeaProjects\\DraftRoom\\src\\main\\resources\\log.txt"); // file will be created if it doesn't exist
+            FileWriter writer = new FileWriter("resources\\log.txt"); // file will be created if it doesn't exist
             writer.write(message);
             writer.close();
         } catch (IOException e) {
