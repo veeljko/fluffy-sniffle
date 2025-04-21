@@ -1,9 +1,11 @@
-package raf.draft.dsw.errorhandler;
+package raf.draft.dsw.errorhandler.view;
+
+import raf.draft.dsw.errorhandler.Logger;
 
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FileLogger implements Logger{
+public class FileLogger implements Logger {
     @Override
     public void log(String message) {
         try {

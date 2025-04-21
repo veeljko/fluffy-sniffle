@@ -1,6 +1,5 @@
-package raf.draft.dsw.model;
+package raf.draft.dsw.jtree.model.composite;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 

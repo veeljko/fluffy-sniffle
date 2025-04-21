@@ -1,9 +1,12 @@
-package raf.draft.dsw.errorhandler;
+package raf.draft.dsw.errorhandler.model;
 
-import java.security.Timestamp;
+import raf.draft.dsw.errorhandler.Greska;
+import raf.draft.dsw.errorhandler.IPublisher;
+import raf.draft.dsw.errorhandler.ISubscriber;
+
 import java.util.Date;
 
-public class MessageGenerator extends IPublisher{
+public class MessageGenerator extends IPublisher {
     private String sadrzaj;
     private Greska greska;
     private Date timestamp;

@@ -1,4 +1,6 @@
-package raf.draft.dsw.errorhandler;
+package raf.draft.dsw.errorhandler.view;
+
+import raf.draft.dsw.errorhandler.Logger;
 
 public class ConsoleLogger implements Logger {
     @Override

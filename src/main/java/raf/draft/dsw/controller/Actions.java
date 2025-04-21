@@ -1,16 +1,15 @@
-package raf.draft.dsw.gui.swing;
-
-import raf.draft.dsw.controller.AboutUsAction;
-import raf.draft.dsw.controller.ExitAction;
+package raf.draft.dsw.controller;
 
 public class Actions {
     private ExitAction exitAction;
     private AboutUsAction aboutUsAction;
+    private NewChildAction newChildAction;
     private static Actions instance;
 
     private Actions(){
         exitAction = new ExitAction();
         aboutUsAction = new AboutUsAction();
+        newChildAction = new NewChildAction();
     }
 
     public ExitAction getExitAction() {
@@ -19,6 +18,10 @@ public class Actions {
 
     public AboutUsAction getAboutUsAction() {
         return aboutUsAction;
+    }
+
+    public NewChildAction getNewChildAction() {
+        return newChildAction;
     }
 
     public static Actions getInstance(){

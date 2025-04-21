@@ -1,8 +1,11 @@
-package raf.draft.dsw.model;
+package raf.draft.dsw.jtree.model.implementation;
+
+import raf.draft.dsw.jtree.model.composite.DraftNode;
+import raf.draft.dsw.jtree.model.composite.DraftNodeComposite;
 
 import java.nio.file.Path;
 
-public class ProjectExplorer extends DraftNodeComposite{
+public class ProjectExplorer extends DraftNodeComposite {
     private String ime;
     private String autor;
     private Path path;
@@ -19,6 +22,12 @@ public class ProjectExplorer extends DraftNodeComposite{
         this.ime = ime;
         this.autor = autor;
         this.path = path;
+    }
+
+    public ProjectExplorer(String nodeNaziv, String ime, String autor) {
+        super(nodeNaziv);
+        this.ime = ime;
+        this.autor = ime;
     }
 
 

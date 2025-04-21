@@ -1,4 +1,7 @@
-package raf.draft.dsw.model;
+package raf.draft.dsw.jtree;
+
+import raf.draft.dsw.jtree.model.composite.DraftNode;
+import raf.draft.dsw.jtree.model.implementation.ProjectExplorer;
 
 public class DraftExplorerImplementation implements DraftRepository{
     private ProjectExplorer projectExplorer;

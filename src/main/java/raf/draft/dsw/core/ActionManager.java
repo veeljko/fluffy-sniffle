@@ -2,14 +2,15 @@ package raf.draft.dsw.core;
 
 import raf.draft.dsw.controller.AboutUsAction;
 import raf.draft.dsw.controller.ExitAction;
+import raf.draft.dsw.controller.NewChildAction;
 
 public class ActionManager {
     ExitAction exitAction = new ExitAction();
     AboutUsAction aboutUsAction = new AboutUsAction();
+    NewChildAction newChildAction = new NewChildAction();
 
     public ActionManager() {
-        exitAction = new ExitAction();
-        aboutUsAction = new AboutUsAction();
+
     }
 
     public AboutUsAction getAboutUsAction() {
@@ -18,5 +19,9 @@ public class ActionManager {
 
     public ExitAction getExitAction() {
         return exitAction;
+    }
+
+    public NewChildAction getNewChildAction() {
+        return newChildAction;
     }
 }
