@@ -1,5 +1,6 @@
-package raf.draft.dsw.jtree;
+package raf.draft.dsw.jtree.controller;
 
+import raf.draft.dsw.jtree.DraftTree;
 import raf.draft.dsw.jtree.model.composite.DraftNode;
 import raf.draft.dsw.jtree.model.composite.DraftNodeComposite;
 import raf.draft.dsw.jtree.model.implementation.Building;
@@ -25,6 +26,10 @@ public class DraftTreeImplementation implements DraftTree {
         return treeView;
     }
 
+    public DraftTreeView getTreeView() {
+        return treeView;
+    }
+
     @Override
     public void addChild(DraftTreeItem parent) {
         if (!(parent.getDraftNode() instanceof DraftNodeComposite)){
@@ -35,6 +40,7 @@ public class DraftTreeImplementation implements DraftTree {
         DraftNode child = createChild(parent.getDraftNode());
         DraftTreeItem childWrapper = new DraftTreeItem(child);
         parent.add(childWrapper);
+
         ((DraftNodeComposite) parent.getDraftNode()).addChild(child);
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
@@ -47,12 +53,9 @@ public class DraftTreeImplementation implements DraftTree {
 
     @Override
     public void deleteChild(DraftTreeItem parent, int childIndex) {
-        if (parent.getDraftNode() instanceof ProjectExplorer){
-            System.out.println("ProjectExplorer ne moze da se izbrise");
-            return;
-        }
+        DraftTreeItem child = (DraftTreeItem) parent.getChildAt(childIndex);
+        ((DraftNodeComposite) parent.getDraftNode()).removeChild(child.getDraftNode());
         parent.remove(childIndex);
-        ((DraftNodeComposite)parent.getDraftNode()).removeChild((DraftNode) parent.getChildAt(childIndex));
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
     }

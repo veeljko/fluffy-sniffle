@@ -3,7 +3,7 @@ package raf.draft.dsw.view;
 import raf.draft.dsw.core.ActionManager;
 import raf.draft.dsw.errorhandler.ISubscriber;
 import raf.draft.dsw.jtree.DraftTree;
-import raf.draft.dsw.jtree.DraftTreeImplementation;
+import raf.draft.dsw.jtree.controller.DraftTreeImplementation;
 import raf.draft.dsw.jtree.model.implementation.ProjectExplorer;
 
 import javax.swing.*;

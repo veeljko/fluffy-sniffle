@@ -13,6 +13,14 @@ public abstract class DraftNode {
         this.parent = parent;
     }
 
+    public String getNodeIme() {
+        return nodeIme;
+    }
+
+    public void setNodeIme(String nodeIme) {
+        this.nodeIme = nodeIme;
+    }
+
     public String getIme() {
         return nodeIme;
     }

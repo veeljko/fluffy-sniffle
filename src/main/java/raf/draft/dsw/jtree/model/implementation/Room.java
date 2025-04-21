@@ -27,4 +27,30 @@ public class Room extends DraftNode {
         this.ime = ime;
         this.autor = autor;
     }
+
+    @Override
+    public String getIme() {
+        return ime;
+    }
+
+    @Override
+    public void setIme(String ime) {
+        this.ime = ime;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public Path getPath() {
+        return path;
+    }
+
+    public void setPath(Path path) {
+        this.path = path;
+    }
 }

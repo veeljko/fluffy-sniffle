@@ -13,7 +13,7 @@ public class DraftTreeItem extends DefaultMutableTreeNode {
 
     @Override
     public String toString() {
-        return draftNode.getIme();
+        return draftNode.getNodeIme();
     }
 
     public void setName(String name) {

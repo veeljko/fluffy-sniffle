@@ -4,8 +4,6 @@ import raf.draft.dsw.errorhandler.view.ConsoleLogger;
 import raf.draft.dsw.errorhandler.view.FileLogger;
 import raf.draft.dsw.errorhandler.controller.LoggerFactory;
 import raf.draft.dsw.errorhandler.model.MessageGenerator;
-import raf.draft.dsw.jtree.DraftRepository;
-import raf.draft.dsw.jtree.DraftTreeImplementation;
 import raf.draft.dsw.view.MainFrame;
 
 public class ApplicationFramework {

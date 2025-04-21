@@ -30,4 +30,30 @@ public class Building extends DraftNodeComposite {
         this.autor = autor;
         this.path = path;
     }
+
+    @Override
+    public String getIme() {
+        return ime;
+    }
+
+    @Override
+    public void setIme(String ime) {
+        this.ime = ime;
+    }
+
+    public Path getPath() {
+        return path;
+    }
+
+    public void setPath(Path path) {
+        this.path = path;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
 }
