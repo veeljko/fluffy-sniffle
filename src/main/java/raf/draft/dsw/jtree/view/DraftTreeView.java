@@ -1,6 +1,6 @@
 package raf.draft.dsw.jtree.view;
 
-import raf.draft.dsw.controller.Actions;
+import raf.draft.dsw.controller.controllerEdit.WindowManager;
 import raf.draft.dsw.jtree.controller.DraftTreeCellEditor;
 import raf.draft.dsw.jtree.controller.DraftTreeSelectionListener;
 
@@ -12,7 +12,7 @@ public class DraftTreeView extends JTree {
         setModel(defaultTreeModel);
         DraftTreeCellRenderer ruTreeCellRenderer = new DraftTreeCellRenderer();
         DraftTreeSelectionListener ruTreeSelectionListener = new DraftTreeSelectionListener();
-        ruTreeSelectionListener.addSubscriber(Actions.getInstance().getEditAction());
+        ruTreeSelectionListener.addSubscriber(WindowManager.getInstance().getEditWindow());
         addTreeSelectionListener(ruTreeSelectionListener);
         setCellEditor(new DraftTreeCellEditor(this, ruTreeCellRenderer));
         setCellRenderer(ruTreeCellRenderer);

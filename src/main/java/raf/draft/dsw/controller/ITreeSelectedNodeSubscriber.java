@@ -1,4 +1,4 @@
-package raf.draft.dsw.jtree;
+package raf.draft.dsw.controller;
 
 import raf.draft.dsw.jtree.model.DraftTreeItem;
 

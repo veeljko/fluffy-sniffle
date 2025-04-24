@@ -1,7 +1,7 @@
 package raf.draft.dsw.view;
 
 import raf.draft.dsw.controller.*;
-import raf.draft.dsw.jtree.controller.DraftTreeImplementation;
+import raf.draft.dsw.controller.viewEdit.EditAction;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;

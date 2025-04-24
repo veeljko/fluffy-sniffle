@@ -1,6 +1,4 @@
-package raf.draft.dsw.jtree;
-
-import raf.draft.dsw.errorhandler.ISubscriber;
+package raf.draft.dsw.controller;
 
 import java.util.ArrayList;
 import java.util.List;
