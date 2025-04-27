@@ -12,6 +12,10 @@ import raf.draft.dsw.jtree.view.DraftTreeView;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class DraftTreeImplementation implements DraftTree {
@@ -45,6 +49,7 @@ public class DraftTreeImplementation implements DraftTree {
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
     }
+
 
     @Override
     public DraftTreeItem getSelectedNode() {
