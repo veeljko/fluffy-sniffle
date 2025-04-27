@@ -1,4 +1,5 @@
 package raf.draft.dsw.jtree.model;
+import com.sun.source.tree.Tree;
 import raf.draft.dsw.jtree.model.composite.DraftNode;
 import raf.draft.dsw.jtree.model.composite.DraftNodeComposite;
 import raf.draft.dsw.jtree.model.implementation.Room;
@@ -35,16 +36,22 @@ public class DraftTreeItem extends DefaultMutableTreeNode {
         this.draftNode = draftNode;
     }
 
-    public ArrayList<DraftTreeItem> getLeafs(){
-        if (children().equals(Collections.emptyEnumeration())) return null;
-        ArrayList<TreeNode> leafs = Collections.list(children());
-        ArrayList<DraftTreeItem> items = new ArrayList<DraftTreeItem>();
-
-        DraftTreeItem leaf = (DraftTreeItem) getFirstLeaf();
-        while (leaf != null) {
-            if (leaf.getDraftNode() instanceof Room) items.add(leaf);
-            leaf = (DraftTreeItem) leaf.getNextLeaf();
+    private void dfs(DraftTreeItem node, ArrayList<DraftTreeItem>leafs){
+        if (node.getDraftNode() instanceof Room){
+            leafs.add(node);
         }
+        else{
+            if (node.children().equals(Collections.emptyEnumeration())) return;
+            ArrayList<TreeNode> children = Collections.list(node.children());
+            for (TreeNode child : children){
+                dfs((DraftTreeItem) child, leafs);
+            }
+        }
+    }
+
+    public ArrayList<DraftTreeItem> getLeafs(){
+        ArrayList<DraftTreeItem> items = new ArrayList<DraftTreeItem>();
+        dfs(this, items);
         return items;
     }
 }
