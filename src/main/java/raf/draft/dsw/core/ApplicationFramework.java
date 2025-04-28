@@ -1,12 +1,10 @@
 package raf.draft.dsw.core;
 
-import raf.draft.dsw.errorhandler.ConsoleLogger;
-import raf.draft.dsw.errorhandler.FileLogger;
-import raf.draft.dsw.errorhandler.LoggerFactory;
-import raf.draft.dsw.errorhandler.MessageGenerator;
-import raf.draft.dsw.gui.swing.MainFrame;
-
-import java.io.Console;
+import raf.draft.dsw.errorhandler.view.ConsoleLogger;
+import raf.draft.dsw.errorhandler.view.FileLogger;
+import raf.draft.dsw.errorhandler.controller.LoggerFactory;
+import raf.draft.dsw.errorhandler.model.MessageGenerator;
+import raf.draft.dsw.view.MainFrame;
 
 public class ApplicationFramework {
     //buduca polja za model celog projekta
@@ -15,7 +13,6 @@ public class ApplicationFramework {
     private MessageGenerator messageGenerator;
     private ConsoleLogger consoleLogger;
     private FileLogger fileLogger;
-
 
     private ApplicationFramework(){
         initialize();

@@ -1,15 +1,16 @@
 package raf.draft.dsw.core;
 
-import raf.draft.dsw.controller.AboutUsAction;
-import raf.draft.dsw.controller.ExitAction;
+import raf.draft.dsw.controller.*;
 
 public class ActionManager {
-    ExitAction exitAction = new ExitAction();
-    AboutUsAction aboutUsAction = new AboutUsAction();
+    private ExitAction exitAction = new ExitAction();
+    private AboutUsAction aboutUsAction = new AboutUsAction();
+    private NewChildAction newChildAction = new NewChildAction();
+    private DeleteAction deleteAction = new DeleteAction();
+    private CreateTabsAction createTabsAction = new CreateTabsAction();
 
     public ActionManager() {
-        exitAction = new ExitAction();
-        aboutUsAction = new AboutUsAction();
+
     }
 
     public AboutUsAction getAboutUsAction() {
@@ -19,4 +20,14 @@ public class ActionManager {
     public ExitAction getExitAction() {
         return exitAction;
     }
+
+    public NewChildAction getNewChildAction() {
+        return newChildAction;
+    }
+
+    public DeleteAction getDeleteAction() {
+        return deleteAction;
+    }
+
+    public CreateTabsAction getCreateTabsAction() { return createTabsAction; }
 }

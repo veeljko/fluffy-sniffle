@@ -1,6 +1,5 @@
-package raf.draft.dsw.model;
+package raf.draft.dsw.jtree.model.composite;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,5 +21,9 @@ public abstract class DraftNodeComposite extends DraftNode {
 
     public void removeChild(DraftNode child) {
         children.remove(child);
+    }
+
+    public List<DraftNode> getChildren() {
+        return children;
     }
 }

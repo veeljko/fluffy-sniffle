@@ -1,4 +1,4 @@
-package raf.draft.dsw.model;
+package raf.draft.dsw.jtree.model.composite;
 
 public abstract class DraftNode {
     private String nodeIme;
@@ -11,6 +11,14 @@ public abstract class DraftNode {
     public DraftNode(String ime, DraftNode parent) {
         this.nodeIme = ime;
         this.parent = parent;
+    }
+
+    public String getNodeIme() {
+        return nodeIme;
+    }
+
+    public void setNodeIme(String nodeIme) {
+        this.nodeIme = nodeIme;
     }
 
     public String getIme() {

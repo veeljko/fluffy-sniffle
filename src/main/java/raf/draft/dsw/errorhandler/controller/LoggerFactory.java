@@ -1,4 +1,8 @@
-package raf.draft.dsw.errorhandler;
+package raf.draft.dsw.errorhandler.controller;
+
+import raf.draft.dsw.errorhandler.Logger;
+import raf.draft.dsw.errorhandler.view.ConsoleLogger;
+import raf.draft.dsw.errorhandler.view.FileLogger;
 
 public class LoggerFactory {
     public Logger createLogger(String type){

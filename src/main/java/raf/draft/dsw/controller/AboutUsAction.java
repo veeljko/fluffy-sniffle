@@ -1,12 +1,9 @@
 package raf.draft.dsw.controller;
 
-import raf.draft.dsw.core.AbstractRoomAction;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.net.URL;
 
 public class AboutUsAction extends AbstractRoomAction {
     public AboutUsAction(){

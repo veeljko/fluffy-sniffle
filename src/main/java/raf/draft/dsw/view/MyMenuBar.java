@@ -1,7 +1,7 @@
-package raf.draft.dsw.gui.swing;
+package raf.draft.dsw.view;
 
-import raf.draft.dsw.controller.AboutUsAction;
-import raf.draft.dsw.controller.ExitAction;
+import raf.draft.dsw.controller.*;
+import raf.draft.dsw.controller.viewEdit.EditAction;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -12,9 +12,14 @@ public class MyMenuBar extends JMenuBar {
         fileMenu.setMnemonic(KeyEvent.VK_F);
         ExitAction ea = Actions.getInstance().getExitAction();
         AboutUsAction au = Actions.getInstance().getAboutUsAction();
+        NewChildAction nca = Actions.getInstance().getNewChildAction();
+        DeleteAction da = Actions.getInstance().getDeleteAction();
+        EditAction eaa = Actions.getInstance().getEditAction();
         fileMenu.add(ea);
         fileMenu.add(au);
+        fileMenu.add(nca);
+        fileMenu.add(da);
+        fileMenu.add(eaa);
         add(fileMenu);
-
     }
 }

@@ -1,4 +1,6 @@
-package raf.draft.dsw.model;
+package raf.draft.dsw.jtree;
+
+import raf.draft.dsw.jtree.model.composite.DraftNode;
 
 public interface DraftRepository {
     public default DraftNode getRootI(DraftNode root) {
