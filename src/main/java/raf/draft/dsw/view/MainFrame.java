@@ -1,11 +1,11 @@
 package raf.draft.dsw.view;
 
-import raf.draft.dsw.JTabbePane.CoursePanel;
-import raf.draft.dsw.JTabbePane.SelectCoursePanel;
+import raf.draft.dsw.JTabbePane.controller.DraftTabs;
 import raf.draft.dsw.core.ActionManager;
 import raf.draft.dsw.errorhandler.ISubscriber;
 import raf.draft.dsw.jtree.DraftTree;
 import raf.draft.dsw.jtree.controller.DraftTreeImplementation;
+import raf.draft.dsw.jtree.model.DraftTreeItem;
 import raf.draft.dsw.jtree.model.implementation.ProjectExplorer;
 
 import javax.swing.*;
@@ -18,14 +18,19 @@ public class MainFrame extends JFrame implements ISubscriber {
     private JMenuBar menu;
     private JToolBar toolBar;
     private DraftTree draftTree;
-    private JTabbedPane tabs;
-    private CoursePanel cource;
-    private SelectCoursePanel selectCourse;
+    private DraftTabs tabs;
+    private JPanel desktop;
+    private DraftTreeItem lastSelectedProject;
 
 
     private MainFrame(){
         this.actionManager = new ActionManager();
         this.draftTree = new DraftTreeImplementation();
+        lastSelectedProject = null;
+
+        tabs = DraftTabs.getInstance();
+        desktop = new JPanel(new BorderLayout());
+        tabs.setDesktop(desktop);
         initialize();
     }
 
@@ -46,7 +51,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         add(toolBar, BorderLayout.NORTH);
 
         JTree projectExplorer = draftTree.generateTree(new ProjectExplorer("Project Explorer", "a", "a"));
-        JPanel desktop = new JPanel(new BorderLayout());
+        projectExplorer.addMouseListener(new DraftTreeMouseListener());
 
         JScrollPane scroll=new JScrollPane(projectExplorer);
         scroll.setMinimumSize(new Dimension(200,150));
@@ -54,24 +59,29 @@ public class MainFrame extends JFrame implements ISubscriber {
         getContentPane().add(split,BorderLayout.CENTER);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
+    }
+//
+//    public void addTab(DraftPanel component){
+//        tabs.addTab(component.getIme(), component);
+//        desktop.add(tabs, BorderLayout.CENTER);
+//    }
+//
+//    public void deleteTabs(){
+//        tabs.removeAll();
+//        desktop.removeAll();
+//    }
+//
+//    public JTabbedPane getTabs(){
+//        return tabs;
+//    }
 
-        tabs = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
-        cource = new CoursePanel();
-        selectCourse = new SelectCoursePanel();
-
-        tabs.setSize(desktop.getMaximumSize());
-        // Adding user defined pannels to JTabbedPane
-        tabs.add(new CoursePanel(), "Course");
-        tabs.add(new SelectCoursePanel(), "Select Course");
-        desktop.add(tabs, BorderLayout.CENTER);
-        desktop.setVisible(true);
-
+    public void setLastSelectedProject(DraftTreeItem lastSelectedProject){
+        this.lastSelectedProject = lastSelectedProject;
     }
 
-    public JTabbedPane getTabs(){
-        return tabs;
+    public DraftTreeItem getLastSelectedProject(){
+        return lastSelectedProject;
     }
-
 
     public static MainFrame getInstance(){
         if (instance == null) instance = new MainFrame();

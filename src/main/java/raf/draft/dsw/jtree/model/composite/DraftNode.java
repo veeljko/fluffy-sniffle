@@ -1,5 +1,7 @@
 package raf.draft.dsw.jtree.model.composite;
 
+import java.util.Objects;
+
 public abstract class DraftNode {
     private String nodeIme;
     private DraftNode parent;
@@ -35,5 +37,18 @@ public abstract class DraftNode {
 
     public void setParent(DraftNode parent) {
         this.parent = parent;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DraftNode draftNode = (DraftNode) o;
+        return Objects.equals(nodeIme, draftNode.nodeIme) && Objects.equals(parent, draftNode.parent);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nodeIme, parent);
     }
 }
