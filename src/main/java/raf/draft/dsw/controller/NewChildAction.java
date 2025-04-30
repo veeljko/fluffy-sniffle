@@ -1,6 +1,7 @@
 package raf.draft.dsw.controller;
 
 import raf.draft.dsw.jtree.model.DraftTreeItem;
+import raf.draft.dsw.jtree.model.implementation.Project;
 import raf.draft.dsw.view.MainFrame;
 
 import javax.swing.*;

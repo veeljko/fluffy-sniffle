@@ -1,5 +1,8 @@
 package raf.draft.dsw.jtree.controller;
 
+import raf.draft.dsw.JTabbePane.model.DraftPanel;
+import raf.draft.dsw.JTabbePane.view.DraftPanelView;
+import raf.draft.dsw.JTabbePane.controller.DraftTabs;
 import raf.draft.dsw.jtree.DraftTree;
 import raf.draft.dsw.jtree.model.composite.DraftNode;
 import raf.draft.dsw.jtree.model.composite.DraftNodeComposite;
@@ -9,18 +12,16 @@ import raf.draft.dsw.jtree.model.implementation.ProjectExplorer;
 import raf.draft.dsw.jtree.model.implementation.Room;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
 import raf.draft.dsw.jtree.view.DraftTreeView;
+import raf.draft.dsw.view.MainFrame;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeNode;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class DraftTreeImplementation implements DraftTree {
     private DraftTreeView treeView;
     private DefaultTreeModel treeModel;
+    private static int cnt = 0;
 
     @Override
     public DraftTreeView generateTree(ProjectExplorer projectExplorer) {
@@ -45,6 +46,19 @@ public class DraftTreeImplementation implements DraftTree {
         DraftTreeItem childWrapper = new DraftTreeItem(child);
         parent.add(childWrapper);
 
+        if (parent.getDraftNode().getParent() instanceof Project && child instanceof Room){
+            MainFrame frame = MainFrame.getInstance();
+            DraftPanelView draftPanelView = DraftTabs.getInstance().getPanelView();
+            DraftTreeItem lastSelectedProject = frame.getLastSelectedProject();
+            if (lastSelectedProject != null) {
+                //System.out.println(lastSelectedProject.getDraftNode().getNodeIme() + " " + parent.getDraftNode().getNodeIme());
+                if (parent.getParent().equals(lastSelectedProject)) {
+                    DraftPanel component = new DraftPanel(parent, childWrapper.getDraftNode().getNodeIme());
+                    draftPanelView.addTab(component);
+                }
+            }
+        }
+
         ((DraftNodeComposite) parent.getDraftNode()).addChild(child);
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
@@ -67,11 +81,11 @@ public class DraftTreeImplementation implements DraftTree {
 
     private DraftNode createChild(DraftNode parent) {
         if (parent instanceof ProjectExplorer)
-            return  new Project("Project" +new Random().nextInt(100), parent, "a","a");
+            return  new Project("Project" + cnt++, parent, "a","a");
         if (parent instanceof Project)
-            return new Building("Building" +new Random().nextInt(100), parent, "a","a");
+            return new Building("Building" + cnt++, parent, "a","a");
         if (parent instanceof Building)
-            return new Room("Room" +new Random().nextInt(100), parent,"a","a");
+            return new Room("Room" + cnt++, parent,"a","a");
         return null;
     }
 }

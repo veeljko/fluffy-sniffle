@@ -35,7 +35,7 @@ public class AboutUsAction extends AbstractRoomAction {
     public void actionPerformed(ActionEvent e) {
         JFrame frame = new JFrame("Novi Prozor");
         frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
 
         JLabel label = new JLabel("Dobrodošli u novi prozor!", SwingConstants.CENTER);

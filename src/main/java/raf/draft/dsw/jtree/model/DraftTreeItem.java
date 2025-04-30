@@ -1,16 +1,12 @@
 package raf.draft.dsw.jtree.model;
-import com.sun.source.tree.Tree;
 import raf.draft.dsw.jtree.model.composite.DraftNode;
-import raf.draft.dsw.jtree.model.composite.DraftNodeComposite;
 import raf.draft.dsw.jtree.model.implementation.Room;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
-import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Enumeration;
-import java.util.EventListener;
+import java.util.Objects;
 
 public class DraftTreeItem extends DefaultMutableTreeNode {
     private DraftNode draftNode;
@@ -53,5 +49,18 @@ public class DraftTreeItem extends DefaultMutableTreeNode {
         ArrayList<DraftTreeItem> items = new ArrayList<DraftTreeItem>();
         dfs(this, items);
         return items;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DraftTreeItem that = (DraftTreeItem) o;
+        return this.draftNode.equals(that.getDraftNode());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(draftNode);
     }
 }
