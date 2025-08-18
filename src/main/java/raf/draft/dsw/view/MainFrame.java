@@ -1,7 +1,7 @@
 package raf.draft.dsw.view;
 
 import raf.draft.dsw.JTabbePane.controller.DraftTabs;
-import raf.draft.dsw.core.ActionManager;
+import raf.draft.dsw.JTabbePane.model.DraftPanel;
 import raf.draft.dsw.errorhandler.ISubscriber;
 import raf.draft.dsw.jtree.DraftTree;
 import raf.draft.dsw.jtree.controller.DraftTreeImplementation;
@@ -13,23 +13,20 @@ import java.awt.*;
 
 public class MainFrame extends JFrame implements ISubscriber {
     //buduca polja za sve komponente view-a na glavnom prozoru
-    private static MainFrame instance;
-    private ActionManager actionManager;
-    private JMenuBar menu;
-    private JToolBar toolBar;
+    private static MainFrame instance = null;
     private DraftTree draftTree;
+
     private DraftTabs tabs;
-    private JPanel desktop;
+    private DraftPanel desktop;
     private DraftTreeItem lastSelectedProject;
 
 
     private MainFrame(){
-        this.actionManager = new ActionManager();
         this.draftTree = new DraftTreeImplementation();
         lastSelectedProject = null;
 
         tabs = DraftTabs.getInstance();
-        desktop = new JPanel(new BorderLayout());
+        desktop = new DraftPanel(new BorderLayout());
         tabs.setDesktop(desktop);
         initialize();
     }
@@ -50,7 +47,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         MyToolBar toolBar = new MyToolBar();
         add(toolBar, BorderLayout.NORTH);
 
-        JTree projectExplorer = draftTree.generateTree(new ProjectExplorer("Project Explorer", "a", "a"));
+        JTree projectExplorer = draftTree.generateTree(new ProjectExplorer("Project Explorer", "a"));
         projectExplorer.addMouseListener(new DraftTreeMouseListener());
 
         JScrollPane scroll=new JScrollPane(projectExplorer);
@@ -88,9 +85,6 @@ public class MainFrame extends JFrame implements ISubscriber {
         return instance;
     }
 
-    public ActionManager getActionManager() {
-        return actionManager;
-    }
 
     @Override
     public void update(String message) {
@@ -100,4 +94,31 @@ public class MainFrame extends JFrame implements ISubscriber {
     public DraftTree getMapTree() {
         return draftTree;
     }
+
+
+    public DraftTree getDraftTree() {
+        return draftTree;
+    }
+
+    public void setDraftTree(DraftTree draftTree) {
+        this.draftTree = draftTree;
+    }
+
+    public DraftTabs getTabs() {
+        return tabs;
+    }
+
+    public void setTabs(DraftTabs tabs) {
+        this.tabs = tabs;
+    }
+
+    public JPanel getDesktop() {
+        return desktop;
+    }
+
+    public void setDesktop(DraftPanel desktop) {
+        this.desktop = desktop;
+    }
+
+
 }

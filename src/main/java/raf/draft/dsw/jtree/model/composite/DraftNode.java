@@ -1,13 +1,22 @@
 package raf.draft.dsw.jtree.model.composite;
 
+import java.nio.file.Path;
 import java.util.Objects;
 
 public abstract class DraftNode {
     private String nodeIme;
+    private String autor;
     private DraftNode parent;
+
 
     public DraftNode(String ime) {
         this.nodeIme = ime;
+    }
+
+    public DraftNode(String nodeIme, String autor, DraftNode parent) {
+        this.nodeIme = nodeIme;
+        this.autor = autor;
+        this.parent = parent;
     }
 
     public DraftNode(String ime, DraftNode parent) {
@@ -51,4 +60,14 @@ public abstract class DraftNode {
     public int hashCode() {
         return Objects.hash(nodeIme, parent);
     }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+
 }

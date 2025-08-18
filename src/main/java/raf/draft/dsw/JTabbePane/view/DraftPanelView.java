@@ -10,9 +10,7 @@ public class DraftPanelView {
     private DraftTabs draftTabs;
 
     public void addTabs(List<DraftPanel> tabs){
-        for (DraftPanel tab : tabs) {
-            DraftTabs.getInstance().getActiveTabs().add(tab);
-        }
+        for (DraftPanel tab : tabs) addTab(tab);
     }
 
     public void addTab(DraftPanel tab){
@@ -22,22 +20,23 @@ public class DraftPanelView {
     }
 
     public void deleteAllTabs(){
-        for (DraftPanel tab : DraftTabs.getInstance().getActiveTabs()) {
-            DraftTabs.getInstance().remove(tab);
-        }
+        DraftTabs.getInstance().removeAll();
         DraftTabs.getInstance().getActiveTabs().clear();
-//        DraftTabs.getInstance().getDesktop().add(DraftTabs.getInstance(), BorderLayout.CENTER);
     }
 
     public void deleteTab(DraftPanel tab){
         DraftTabs.getInstance().getActiveTabs().remove(tab);
         DraftTabs.getInstance().remove(tab);
-        DraftTabs.getInstance().getDesktop().removeAll();
-        DraftTabs.getInstance().getDesktop().add(DraftTabs.getInstance(), BorderLayout.CENTER);
     }
 
-    public void setTabColor(DraftPanel tab){
+    public void changeTabName(String oldName, String newName){
+        int index = DraftTabs.getInstance().indexOfTab(oldName);
+        if (index != -1) DraftTabs.getInstance().setTitleAt(index, newName);
+    }
+
+    private void setTabColor(DraftPanel tab){
         int index = DraftTabs.getInstance().indexOfTab(tab.getIme());
         if (index != -1) DraftTabs.getInstance().setBackgroundAt(index, tab.getColor());
     }
+
 }

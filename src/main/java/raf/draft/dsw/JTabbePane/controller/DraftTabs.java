@@ -2,15 +2,19 @@ package raf.draft.dsw.JTabbePane.controller;
 
 import raf.draft.dsw.JTabbePane.model.DraftPanel;
 import raf.draft.dsw.JTabbePane.view.DraftPanelView;
+import raf.draft.dsw.jtree.model.DraftTreeItem;
+import raf.draft.dsw.jtree.model.composite.DraftNode;
+import raf.draft.dsw.jtree.model.implementation.Room;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DraftTabs extends JTabbedPane {
     private List<DraftPanel> activeTabs = new ArrayList<>();
-    private JPanel desktop;
+    private DraftPanel desktop;
     private static DraftTabs instance = null;
     private DraftPanelView panelView;
 
@@ -32,7 +36,7 @@ public class DraftTabs extends JTabbedPane {
         desktop.setVisible(true);
     }
 
-    public void setDesktop(JPanel desktop) {
+    public void setDesktop(DraftPanel desktop) {
         this.desktop = desktop;
         initialize();
     }

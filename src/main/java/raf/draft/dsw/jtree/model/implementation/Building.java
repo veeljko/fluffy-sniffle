@@ -8,32 +8,15 @@ import java.nio.file.Path;
 import java.util.Random;
 
 public class Building extends DraftNodeComposite {
-    private String ime;
-    private String autor;
-    private Path path;
     private Color color;
 
-    public Building(String nodeNaziv, String ime, String autor, Path path) {
-        super(nodeNaziv);
-        this.ime = ime;
-        this.autor = autor;
-        this.path = path;
+    public Building(String nodeNaziv, String autor) {
+        super(nodeNaziv, autor, null);
         setColor();
     }
 
-    public Building(String nodeNaziv, DraftNode parent, String ime, String autor, Path path) {
-        super(nodeNaziv, parent);
-        this.ime = ime;
-        this.autor = autor;
-        this.path = path;
-        setColor();
-    }
-
-    public Building(String nodeNaziv, DraftNode parent, String ime, String autor) {
-        super(nodeNaziv, parent);
-        this.ime = ime;
-        this.autor = autor;
-        this.path = path;
+    public Building(String nodeNaziv, DraftNode parent, String autor) {
+        super(nodeNaziv, autor, parent);
         setColor();
     }
 
@@ -50,29 +33,4 @@ public class Building extends DraftNodeComposite {
         return color;
     }
 
-    @Override
-    public String getIme() {
-        return ime;
-    }
-
-    @Override
-    public void setIme(String ime) {
-        this.ime = ime;
-    }
-
-    public Path getPath() {
-        return path;
-    }
-
-    public void setPath(Path path) {
-        this.path = path;
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
 }

@@ -16,7 +16,6 @@ import raf.draft.dsw.view.MainFrame;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
-import java.util.Random;
 
 public class DraftTreeImplementation implements DraftTree {
     private DraftTreeView treeView;
@@ -56,6 +55,12 @@ public class DraftTreeImplementation implements DraftTree {
                     DraftPanel component = new DraftPanel(parent, childWrapper.getDraftNode().getNodeIme());
                     draftPanelView.addTab(component);
                 }
+                else if (lastSelectedProject.getDraftNode() instanceof Building){
+                    if (childWrapper.getDraftNode().getParent().getNodeIme().equals(lastSelectedProject.getDraftNode().getNodeIme())) {
+                        DraftPanel component = new DraftPanel(parent, childWrapper.getDraftNode().getNodeIme());
+                        draftPanelView.addTab(component);
+                    }
+                }
             }
         }
 
@@ -73,19 +78,30 @@ public class DraftTreeImplementation implements DraftTree {
     @Override
     public void deleteChild(DraftTreeItem parent, int childIndex) {
         DraftTreeItem child = (DraftTreeItem) parent.getChildAt(childIndex);
+
         ((DraftNodeComposite) parent.getDraftNode()).removeChild(child.getDraftNode());
         parent.remove(childIndex);
+
+        for (DraftPanel panel : DraftTabs.getInstance().getActiveTabs()){
+            if (panel.getIme().equals(child.getDraftNode().getNodeIme())){
+                DraftTabs.getInstance().getPanelView().deleteTab(panel);
+                DraftTabs.getInstance().getActiveTabs().remove(panel);
+                break;
+            }
+        }
+
+
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
     }
 
     private DraftNode createChild(DraftNode parent) {
         if (parent instanceof ProjectExplorer)
-            return  new Project("Project" + cnt++, parent, "a","a");
+            return  new Project("Project" + cnt++, parent, "a");
         if (parent instanceof Project)
-            return new Building("Building" + cnt++, parent, "a","a");
+            return new Building("Building" + cnt++, parent, "a");
         if (parent instanceof Building)
-            return new Room("Room" + cnt++, parent,"a","a");
+            return new Room("Room" + cnt++, parent,"a");
         return null;
     }
 }

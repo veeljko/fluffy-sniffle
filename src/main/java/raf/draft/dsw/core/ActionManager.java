@@ -1,33 +1,51 @@
 package raf.draft.dsw.core;
 
-import raf.draft.dsw.controller.*;
+import raf.draft.dsw.actions.AboutUsAction;
+import raf.draft.dsw.actions.DeleteAction;
+import raf.draft.dsw.actions.ExitAction;
+import raf.draft.dsw.actions.NewChildAction;
+import raf.draft.dsw.controller.modelEdit.EditAction;
 
 public class ActionManager {
-    private ExitAction exitAction = new ExitAction();
-    private AboutUsAction aboutUsAction = new AboutUsAction();
-    private NewChildAction newChildAction = new NewChildAction();
-    private DeleteAction deleteAction = new DeleteAction();
-    private CreateTabsAction createTabsAction = new CreateTabsAction();
+    private ExitAction exitAction;
+    private AboutUsAction aboutUsAction;
+    private NewChildAction newChildAction;
+    private DeleteAction deleteAction;
+    private EditAction editAction;
+    private static ActionManager instance;
 
-    public ActionManager() {
-
-    }
-
-    public AboutUsAction getAboutUsAction() {
-        return aboutUsAction;
+    private ActionManager(){
+        exitAction = new ExitAction();
+        aboutUsAction = new AboutUsAction();
+        newChildAction = new NewChildAction();
+        deleteAction = new DeleteAction();
+        editAction = new EditAction();
     }
 
     public ExitAction getExitAction() {
         return exitAction;
     }
 
+    public AboutUsAction getAboutUsAction() {
+        return aboutUsAction;
+    }
+
     public NewChildAction getNewChildAction() {
         return newChildAction;
+    }
+
+    public static ActionManager getInstance(){
+        if(instance == null){
+            instance = new ActionManager();
+        }
+        return instance;
     }
 
     public DeleteAction getDeleteAction() {
         return deleteAction;
     }
 
-    public CreateTabsAction getCreateTabsAction() { return createTabsAction; }
+    public EditAction getEditAction() {
+        return editAction;
+    }
 }

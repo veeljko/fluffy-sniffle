@@ -1,7 +1,11 @@
 package raf.draft.dsw.view;
 
-import raf.draft.dsw.controller.*;
-import raf.draft.dsw.controller.viewEdit.EditAction;
+import raf.draft.dsw.actions.AboutUsAction;
+import raf.draft.dsw.actions.ExitAction;
+import raf.draft.dsw.actions.DeleteAction;
+import raf.draft.dsw.actions.NewChildAction;
+import raf.draft.dsw.controller.modelEdit.EditAction;
+import raf.draft.dsw.core.ActionManager;
 
 import javax.swing.*;
 
@@ -9,11 +13,11 @@ public class MyToolBar extends JToolBar {
 
     public MyToolBar(){
         super(HORIZONTAL);
-        ExitAction ea = Actions.getInstance().getExitAction();
-        AboutUsAction ab = Actions.getInstance().getAboutUsAction();
-        NewChildAction nca = Actions.getInstance().getNewChildAction();
-        DeleteAction da = Actions.getInstance().getDeleteAction();
-        EditAction ea2 = Actions.getInstance().getEditAction();
+        ExitAction ea = ActionManager.getInstance().getExitAction();
+        AboutUsAction ab = ActionManager.getInstance().getAboutUsAction();
+        NewChildAction nca = ActionManager.getInstance().getNewChildAction();
+        DeleteAction da = ActionManager.getInstance().getDeleteAction();
+        EditAction ea2 = ActionManager.getInstance().getEditAction();
         setFloatable(false);
         add(ea);
         add(ab);
