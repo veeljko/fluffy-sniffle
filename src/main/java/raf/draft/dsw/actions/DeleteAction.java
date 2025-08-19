@@ -33,7 +33,7 @@ public class DeleteAction extends AbstractRoomAction {
     }
 
     public void actionPerformed(ActionEvent arg0) {
-        DraftTreeItem selected = (DraftTreeItem) MainFrame.getInstance().getMapTree().getSelectedNode();
+        DraftTreeItem selected = MainFrame.getInstance().getMapTree().getSelectedNode();
         if (selected.getParent() == null) return;
         ArrayList<DraftTreeItem> childs = new ArrayList<>();
         dfs(selected, childs);

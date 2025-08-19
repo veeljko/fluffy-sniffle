@@ -1,4 +1,4 @@
-package raf.draft.dsw.JTabbePane;
+package raf.draft.dsw.JTabbePane.controller;
 
 import raf.draft.dsw.JTabbePane.model.DraftPanel;
 import raf.draft.dsw.JTabbePane.view.DraftPanelView;
@@ -8,19 +8,11 @@ import java.awt.*;
 
 public class DraftTabs extends JTabbedPane {
     private DraftPanel desktop;
-    private static DraftTabs instance = null;
     private DraftPanelView panelView;
 
-    private DraftTabs() {
+    public DraftTabs() {
         super(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
-        panelView = new DraftPanelView();
-    }
-
-    public static DraftTabs getInstance() {
-        if (instance == null) {
-            instance = new DraftTabs();
-        }
-        return instance;
+        panelView = new DraftPanelView(this);
     }
 
     public void initialize(){

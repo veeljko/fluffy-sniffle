@@ -1,5 +1,6 @@
 package raf.draft.dsw.view;
 
+import com.sun.tools.javac.Main;
 import raf.draft.dsw.actions.aboutus.AboutUsAction;
 import raf.draft.dsw.actions.ExitAction;
 import raf.draft.dsw.actions.DeleteAction;
@@ -10,14 +11,20 @@ import raf.draft.dsw.core.ActionManager;
 import javax.swing.*;
 
 public class MyToolBar extends JToolBar {
+    private ActionManager actionManager;
 
-    public MyToolBar(){
+    public MyToolBar(ActionManager actionManager) {
         super(HORIZONTAL);
-        ExitAction ea = ActionManager.getInstance().getExitAction();
-        AboutUsAction ab = ActionManager.getInstance().getAboutUsAction();
-        NewChildAction nca = ActionManager.getInstance().getNewChildAction();
-        DeleteAction da = ActionManager.getInstance().getDeleteAction();
-        EditAction ea2 = ActionManager.getInstance().getEditAction();
+        this.actionManager = actionManager;
+        initialize();
+    }
+
+    private void initialize(){
+        ExitAction ea = actionManager.getExitAction();
+        AboutUsAction ab = actionManager.getAboutUsAction();
+        NewChildAction nca = actionManager.getNewChildAction();
+        DeleteAction da = actionManager.getDeleteAction();
+        EditAction ea2 = actionManager.getEditAction();
         setFloatable(false);
         add(ea);
         add(ab);
