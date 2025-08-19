@@ -1,8 +1,10 @@
 package raf.draft.dsw.jtree.controller;
 
+import com.sun.tools.javac.Main;
 import raf.draft.dsw.JTabbePane.model.DraftPanel;
 import raf.draft.dsw.JTabbePane.view.DraftPanelView;
-import raf.draft.dsw.JTabbePane.controller.DraftTabs;
+import raf.draft.dsw.JTabbePane.DraftTabs;
+import raf.draft.dsw.core.ApplicationFramework;
 import raf.draft.dsw.jtree.DraftTree;
 import raf.draft.dsw.jtree.model.composite.DraftNode;
 import raf.draft.dsw.jtree.model.composite.DraftNodeComposite;
@@ -48,7 +50,7 @@ public class DraftTreeImplementation implements DraftTree {
         if (parent.getDraftNode().getParent() instanceof Project && child instanceof Room){
             MainFrame frame = MainFrame.getInstance();
             DraftPanelView draftPanelView = DraftTabs.getInstance().getPanelView();
-            DraftTreeItem lastSelectedProject = frame.getLastSelectedProject();
+            DraftTreeItem lastSelectedProject = MainFrame.getInstance().getLastSelectedProject();
             if (lastSelectedProject != null) {
                 //System.out.println(lastSelectedProject.getDraftNode().getNodeIme() + " " + parent.getDraftNode().getNodeIme());
                 if (parent.getParent().equals(lastSelectedProject)) {
@@ -82,14 +84,8 @@ public class DraftTreeImplementation implements DraftTree {
         ((DraftNodeComposite) parent.getDraftNode()).removeChild(child.getDraftNode());
         parent.remove(childIndex);
 
-        for (DraftPanel panel : DraftTabs.getInstance().getActiveTabs()){
-            if (panel.getIme().equals(child.getDraftNode().getNodeIme())){
-                DraftTabs.getInstance().getPanelView().deleteTab(panel);
-                DraftTabs.getInstance().getActiveTabs().remove(panel);
-                break;
-            }
-        }
-
+        int index = DraftTabs.getInstance().indexOfTab(child.getDraftNode().getNodeIme());
+        if (index != -1) DraftTabs.getInstance().remove(index);
 
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);

@@ -1,8 +1,11 @@
 package raf.draft.dsw.jtree.view;
 
-import raf.draft.dsw.controller.controllerEdit.EditWindowManager;
+import com.sun.tools.javac.Main;
+import raf.draft.dsw.actions.edit.controllerEdit.EditWindowManager;
 import raf.draft.dsw.jtree.controller.DraftTreeCellEditor;
+import raf.draft.dsw.jtree.controller.DraftTreeImplementation;
 import raf.draft.dsw.jtree.controller.DraftTreeSelectionListener;
+import raf.draft.dsw.view.MainFrame;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;

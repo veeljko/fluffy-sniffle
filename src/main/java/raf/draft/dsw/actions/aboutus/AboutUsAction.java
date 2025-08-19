@@ -1,4 +1,4 @@
-package raf.draft.dsw.actions;
+package raf.draft.dsw.actions.aboutus;
 
 import raf.draft.dsw.actions.model.AbstractRoomAction;
 
@@ -6,17 +6,18 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-public class ExitAction extends AbstractRoomAction {
-    public ExitAction(){
+public class AboutUsAction extends AbstractRoomAction {
+    public AboutUsAction(){
         //bitno
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F4, ActionEvent.ALT_MASK));
         putValue(SMALL_ICON, super.loadIcon("/images/exit.png"));
-        putValue(NAME, "Exit");
-        putValue(SHORT_DESCRIPTION, "Exit");
+        putValue(NAME, "About Us");
+        putValue(SHORT_DESCRIPTION, "About Us");
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.exit(0);
+        AboutUsWindow window = new AboutUsWindow();
+        window.setVisible(true);
     }
 }

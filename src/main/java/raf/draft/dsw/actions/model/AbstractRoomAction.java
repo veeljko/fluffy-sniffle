@@ -1,4 +1,4 @@
-package raf.draft.dsw.actions;
+package raf.draft.dsw.actions.model;
 
 import javax.swing.*;
 import java.awt.*;

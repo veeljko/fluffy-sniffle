@@ -1,5 +1,7 @@
 package raf.draft.dsw.core;
 
+import raf.draft.dsw.JTabbePane.DraftTabs;
+import raf.draft.dsw.JTabbePane.view.DraftPanelView;
 import raf.draft.dsw.errorhandler.view.ConsoleLogger;
 import raf.draft.dsw.errorhandler.view.FileLogger;
 import raf.draft.dsw.errorhandler.controller.LoggerFactory;
@@ -31,6 +33,7 @@ public class ApplicationFramework {
         if (instance == null) instance = new ApplicationFramework();
         return instance;
     }
+
 
     public MessageGenerator getMessageGenerator() {
         return messageGenerator;

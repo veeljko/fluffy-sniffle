@@ -1,7 +1,7 @@
-package raf.draft.dsw.controller.modelEdit;
+package raf.draft.dsw.actions.edit.modelEdit;
 
-import raf.draft.dsw.actions.AbstractRoomAction;
-import raf.draft.dsw.controller.controllerEdit.EditWindowManager;
+import raf.draft.dsw.actions.model.AbstractRoomAction;
+import raf.draft.dsw.actions.edit.controllerEdit.EditWindowManager;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,32 +1,30 @@
 package raf.draft.dsw.JTabbePane.view;
 
-import raf.draft.dsw.JTabbePane.controller.DraftTabs;
+import raf.draft.dsw.JTabbePane.DraftTabs;
 import raf.draft.dsw.JTabbePane.model.DraftPanel;
+import raf.draft.dsw.core.ApplicationFramework;
+import raf.draft.dsw.jtree.model.DraftTreeItem;
 
-import java.awt.*;
 import java.util.List;
 
 public class DraftPanelView {
-    private DraftTabs draftTabs;
-
-    public void addTabs(List<DraftPanel> tabs){
-        for (DraftPanel tab : tabs) addTab(tab);
-    }
 
     public void addTab(DraftPanel tab){
-        DraftTabs.getInstance().getActiveTabs().add(tab);
         DraftTabs.getInstance().add(tab, tab.getIme());
         setTabColor(tab);
     }
 
-    public void deleteAllTabs(){
-        DraftTabs.getInstance().removeAll();
-        DraftTabs.getInstance().getActiveTabs().clear();
+    public void addTabs(List<DraftTreeItem> leafs){
+        deleteAllTabs();
+        for (DraftTreeItem leaf : leafs) {
+            String ime = leaf.getDraftNode().getNodeIme();
+            DraftPanel component = new DraftPanel((DraftTreeItem) leaf.getParent(), ime);
+            addTab(component);
+        }
     }
 
-    public void deleteTab(DraftPanel tab){
-        DraftTabs.getInstance().getActiveTabs().remove(tab);
-        DraftTabs.getInstance().remove(tab);
+    public void deleteAllTabs(){
+        DraftTabs.getInstance().removeAll();
     }
 
     public void changeTabName(String oldName, String newName){
