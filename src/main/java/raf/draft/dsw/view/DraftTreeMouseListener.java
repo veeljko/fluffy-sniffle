@@ -18,18 +18,9 @@ public class DraftTreeMouseListener extends MouseAdapter {
         if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON3) {
             MainFrame frame = MainFrame.getInstance();
             DraftTreeItem selected = frame.getMapTree().getSelectedNode();
-
-            if (selected.getDraftNode() instanceof Building ||
-            selected.getDraftNode() instanceof Project) frame.setLastSelectedProject(selected);
-
+            frame.setLastSelectedProject(selected);
             DraftPanelView draftPanelView = DraftTabs.getInstance().getPanelView();
-            draftPanelView.deleteAllTabs();
-            List<DraftTreeItem> leafs = selected.getLeafs();
-            for (DraftTreeItem leaf : leafs) {
-                String ime = leaf.getDraftNode().getNodeIme();
-                DraftPanel component = new DraftPanel((DraftTreeItem) leaf.getParent(), ime);
-                draftPanelView.addTab(component);
-            }
+            draftPanelView.addTabs(selected.getLeafs());
         }
     }
 }

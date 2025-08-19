@@ -1,7 +1,7 @@
 package raf.draft.dsw.actions.edit.controllerEdit;
 
 import raf.draft.dsw.actions.edit.viewEdit.EditWindow;
-import raf.draft.dsw.controller.ITreeSelectedNodeSubscriber;
+import SelectedNodeUpdate.ITreeSelectedNodeSubscriber;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
 
 public class EditWindowManager implements ITreeSelectedNodeSubscriber {

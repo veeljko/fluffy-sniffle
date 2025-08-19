@@ -1,6 +1,7 @@
 package raf.draft.dsw.actions.edit.modelEdit;
 
 import raf.draft.dsw.JTabbePane.DraftTabs;
+import raf.draft.dsw.jtree.controller.DraftTreeImplementation;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
 import raf.draft.dsw.view.MainFrame;
 
@@ -27,5 +28,6 @@ public class EditButtonClick implements ActionListener {
             lastClickedNode.getDraftNode().setNodeIme(input1.getText());
         }
         frame.dispose();
+
     }
 }

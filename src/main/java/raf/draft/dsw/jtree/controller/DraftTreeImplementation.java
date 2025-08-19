@@ -1,5 +1,6 @@
 package raf.draft.dsw.jtree.controller;
 
+import com.sun.tools.javac.Main;
 import raf.draft.dsw.JTabbePane.model.DraftPanel;
 import raf.draft.dsw.JTabbePane.view.DraftPanelView;
 import raf.draft.dsw.JTabbePane.DraftTabs;
@@ -49,7 +50,7 @@ public class DraftTreeImplementation implements DraftTree {
         if (parent.getDraftNode().getParent() instanceof Project && child instanceof Room){
             MainFrame frame = MainFrame.getInstance();
             DraftPanelView draftPanelView = DraftTabs.getInstance().getPanelView();
-            DraftTreeItem lastSelectedProject = frame.getLastSelectedProject();
+            DraftTreeItem lastSelectedProject = MainFrame.getInstance().getLastSelectedProject();
             if (lastSelectedProject != null) {
                 //System.out.println(lastSelectedProject.getDraftNode().getNodeIme() + " " + parent.getDraftNode().getNodeIme());
                 if (parent.getParent().equals(lastSelectedProject)) {

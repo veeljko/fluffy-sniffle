@@ -1,9 +1,6 @@
 package raf.draft.dsw.actions.edit.viewEdit;
 
 import raf.draft.dsw.actions.edit.modelEdit.EditButtonClick;
-import raf.draft.dsw.controller.ITreeSelectedNodeSubscriber;
-import raf.draft.dsw.jtree.model.DraftTreeItem;
-import raf.draft.dsw.view.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
