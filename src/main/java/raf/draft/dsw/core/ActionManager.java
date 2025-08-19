@@ -1,10 +1,10 @@
 package raf.draft.dsw.core;
 
-import raf.draft.dsw.actions.AboutUsAction;
+import raf.draft.dsw.actions.aboutus.AboutUsAction;
 import raf.draft.dsw.actions.DeleteAction;
 import raf.draft.dsw.actions.ExitAction;
 import raf.draft.dsw.actions.NewChildAction;
-import raf.draft.dsw.controller.modelEdit.EditAction;
+import raf.draft.dsw.actions.edit.modelEdit.EditAction;
 
 public class ActionManager {
     private ExitAction exitAction;

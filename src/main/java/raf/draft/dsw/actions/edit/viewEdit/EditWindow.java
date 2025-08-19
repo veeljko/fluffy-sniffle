@@ -1,19 +1,18 @@
-package raf.draft.dsw.controller.viewEdit;
+package raf.draft.dsw.actions.edit.viewEdit;
 
+import raf.draft.dsw.actions.edit.modelEdit.EditButtonClick;
 import raf.draft.dsw.controller.ITreeSelectedNodeSubscriber;
-import raf.draft.dsw.controller.modelEdit.EditButtonClick;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
+import raf.draft.dsw.view.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 
 public class EditWindow {
     private JFrame frame;
     private JPanel inputPanel;
     private JTextField input3 = null;
-    private String path = "";
-    private DraftTreeItem lastClickedNode = null;
+    private JTextField input1 = null, input2 = null;
     private EditButtonClick editButtonClick = null;
 
     public EditWindow() {
@@ -32,18 +31,18 @@ public class EditWindow {
 
         // Create labels and text fields
         inputPanel.add(new JLabel("Node Ime :"));
-        JTextField input1 = new JTextField();
+        input1 = new JTextField();
         inputPanel.add(input1);
 
         inputPanel.add(new JLabel("Autor :"));
-        JTextField input2 = new JTextField();
+        input2 = new JTextField();
         inputPanel.add(input2);
 
-        inputPanel.add(new JLabel("Path :"));
+        inputPanel.add(new JLabel("Selected :"));
         input3 = new JTextField();
         input3.setEditable(false);
 
-        input3.setText(path);
+
         inputPanel.add(input3);
 
         // Create a button
@@ -59,20 +58,20 @@ public class EditWindow {
         button.addActionListener(editButtonClick);
     }
 
+    public JTextField getInput1() {
+        return input1;
+    }
+
+    public JTextField getInput2() {
+        return input2;
+    }
+
     public EditButtonClick getEditButtonClick() {
         return editButtonClick;
     }
 
     public void setEditButtonClick(EditButtonClick editButtonClick) {
         this.editButtonClick = editButtonClick;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
     }
 
     public JTextField getInput3() {
@@ -86,4 +85,5 @@ public class EditWindow {
     public void setVisible(){
         frame.setVisible(true);
     }
+
 }

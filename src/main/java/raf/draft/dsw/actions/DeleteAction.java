@@ -1,6 +1,6 @@
 package raf.draft.dsw.actions;
 
-import raf.draft.dsw.JTabbePane.controller.DraftTabs;
+import raf.draft.dsw.actions.model.AbstractRoomAction;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
 import raf.draft.dsw.jtree.model.implementation.Room;
 import raf.draft.dsw.view.MainFrame;
@@ -34,9 +34,7 @@ public class DeleteAction extends AbstractRoomAction {
 
     public void actionPerformed(ActionEvent arg0) {
         DraftTreeItem selected = (DraftTreeItem) MainFrame.getInstance().getMapTree().getSelectedNode();
-        if (selected.getParent() == null) {
-            return;
-        }
+        if (selected.getParent() == null) return;
         ArrayList<DraftTreeItem> childs = new ArrayList<>();
         dfs(selected, childs);
         for (DraftTreeItem child : childs) {

@@ -1,5 +1,6 @@
 package raf.draft.dsw.actions;
 
+import raf.draft.dsw.actions.model.AbstractRoomAction;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
 import raf.draft.dsw.view.MainFrame;
 

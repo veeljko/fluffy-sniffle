@@ -1,7 +1,8 @@
 package raf.draft.dsw.view;
 
-import raf.draft.dsw.JTabbePane.controller.DraftTabs;
+import raf.draft.dsw.JTabbePane.DraftTabs;
 import raf.draft.dsw.JTabbePane.model.DraftPanel;
+import raf.draft.dsw.core.ApplicationFramework;
 import raf.draft.dsw.errorhandler.ISubscriber;
 import raf.draft.dsw.jtree.DraftTree;
 import raf.draft.dsw.jtree.controller.DraftTreeImplementation;
@@ -11,12 +12,11 @@ import raf.draft.dsw.jtree.model.implementation.ProjectExplorer;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainFrame extends JFrame implements ISubscriber {
+public class MainFrame extends JFrame {
     //buduca polja za sve komponente view-a na glavnom prozoru
     private static MainFrame instance = null;
     private DraftTree draftTree;
 
-    private DraftTabs tabs;
     private DraftPanel desktop;
     private DraftTreeItem lastSelectedProject;
 
@@ -25,7 +25,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         this.draftTree = new DraftTreeImplementation();
         lastSelectedProject = null;
 
-        tabs = DraftTabs.getInstance();
+        DraftTabs tabs = DraftTabs.getInstance();
         desktop = new DraftPanel(new BorderLayout());
         tabs.setDesktop(desktop);
         initialize();
@@ -57,20 +57,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
     }
-//
-//    public void addTab(DraftPanel component){
-//        tabs.addTab(component.getIme(), component);
-//        desktop.add(tabs, BorderLayout.CENTER);
-//    }
-//
-//    public void deleteTabs(){
-//        tabs.removeAll();
-//        desktop.removeAll();
-//    }
-//
-//    public JTabbedPane getTabs(){
-//        return tabs;
-//    }
+
 
     public void setLastSelectedProject(DraftTreeItem lastSelectedProject){
         this.lastSelectedProject = lastSelectedProject;
@@ -83,12 +70,6 @@ public class MainFrame extends JFrame implements ISubscriber {
     public static MainFrame getInstance(){
         if (instance == null) instance = new MainFrame();
         return instance;
-    }
-
-
-    @Override
-    public void update(String message) {
-        JOptionPane.showMessageDialog(null, "Uneta poruka: " + message, "Prikaz poruke", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public DraftTree getMapTree() {
@@ -104,13 +85,6 @@ public class MainFrame extends JFrame implements ISubscriber {
         this.draftTree = draftTree;
     }
 
-    public DraftTabs getTabs() {
-        return tabs;
-    }
-
-    public void setTabs(DraftTabs tabs) {
-        this.tabs = tabs;
-    }
 
     public JPanel getDesktop() {
         return desktop;
