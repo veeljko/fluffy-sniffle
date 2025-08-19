@@ -12,9 +12,8 @@ public class ActionManager {
     private NewChildAction newChildAction;
     private DeleteAction deleteAction;
     private EditAction editAction;
-    private static ActionManager instance;
 
-    private ActionManager(){
+    public ActionManager(){
         exitAction = new ExitAction();
         aboutUsAction = new AboutUsAction();
         newChildAction = new NewChildAction();
@@ -32,13 +31,6 @@ public class ActionManager {
 
     public NewChildAction getNewChildAction() {
         return newChildAction;
-    }
-
-    public static ActionManager getInstance(){
-        if(instance == null){
-            instance = new ActionManager();
-        }
-        return instance;
     }
 
     public DeleteAction getDeleteAction() {

@@ -5,6 +5,6 @@ import raf.draft.dsw.view.MainFrame;
 public class AppCore {
     public static void main(String[] args) {
         MainFrame mainFrame = MainFrame.getInstance();
-        ApplicationFramework appCore = ApplicationFramework.getInstance();
+        ApplicationFramework appCore = new ApplicationFramework(mainFrame);
     }
 }

@@ -1,10 +1,7 @@
 package raf.draft.dsw.jtree.controller;
 
-import com.sun.tools.javac.Main;
 import raf.draft.dsw.JTabbePane.model.DraftPanel;
 import raf.draft.dsw.JTabbePane.view.DraftPanelView;
-import raf.draft.dsw.JTabbePane.DraftTabs;
-import raf.draft.dsw.core.ApplicationFramework;
 import raf.draft.dsw.jtree.DraftTree;
 import raf.draft.dsw.jtree.model.composite.DraftNode;
 import raf.draft.dsw.jtree.model.composite.DraftNodeComposite;
@@ -49,7 +46,7 @@ public class DraftTreeImplementation implements DraftTree {
 
         if (parent.getDraftNode().getParent() instanceof Project && child instanceof Room){
             MainFrame frame = MainFrame.getInstance();
-            DraftPanelView draftPanelView = DraftTabs.getInstance().getPanelView();
+            DraftPanelView draftPanelView = MainFrame.getInstance().getTabs().getPanelView();
             DraftTreeItem lastSelectedProject = MainFrame.getInstance().getLastSelectedProject();
             if (lastSelectedProject != null) {
                 //System.out.println(lastSelectedProject.getDraftNode().getNodeIme() + " " + parent.getDraftNode().getNodeIme());
@@ -84,8 +81,8 @@ public class DraftTreeImplementation implements DraftTree {
         ((DraftNodeComposite) parent.getDraftNode()).removeChild(child.getDraftNode());
         parent.remove(childIndex);
 
-        int index = DraftTabs.getInstance().indexOfTab(child.getDraftNode().getNodeIme());
-        if (index != -1) DraftTabs.getInstance().remove(index);
+        int index = MainFrame.getInstance().getTabs().indexOfTab(child.getDraftNode().getNodeIme());
+        if (index != -1) MainFrame.getInstance().getTabs().remove(index);
 
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);

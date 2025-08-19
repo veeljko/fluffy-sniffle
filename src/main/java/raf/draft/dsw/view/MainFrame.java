@@ -1,9 +1,8 @@
 package raf.draft.dsw.view;
 
-import raf.draft.dsw.JTabbePane.DraftTabs;
+import raf.draft.dsw.JTabbePane.controller.DraftTabs;
 import raf.draft.dsw.JTabbePane.model.DraftPanel;
-import raf.draft.dsw.core.ApplicationFramework;
-import raf.draft.dsw.errorhandler.ISubscriber;
+import raf.draft.dsw.core.ActionManager;
 import raf.draft.dsw.jtree.DraftTree;
 import raf.draft.dsw.jtree.controller.DraftTreeImplementation;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
@@ -15,18 +14,20 @@ import java.awt.*;
 public class MainFrame extends JFrame {
     //buduca polja za sve komponente view-a na glavnom prozoru
     private static MainFrame instance = null;
+    private ActionManager actionManager;
     private DraftTree draftTree;
-
+    private DraftTabs tabs;
     private DraftPanel desktop;
     private DraftTreeItem lastSelectedProject;
 
 
     private MainFrame(){
         this.draftTree = new DraftTreeImplementation();
-        lastSelectedProject = null;
+        this.actionManager = new ActionManager();
+        this.tabs = new DraftTabs();
+        this.desktop = new DraftPanel(new BorderLayout());
 
-        DraftTabs tabs = DraftTabs.getInstance();
-        desktop = new DraftPanel(new BorderLayout());
+        lastSelectedProject = null;
         tabs.setDesktop(desktop);
         initialize();
     }
@@ -41,10 +42,10 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("DraftRoom");
 
-        MyMenuBar menuBar = new MyMenuBar();
+        MyMenuBar menuBar = new MyMenuBar(actionManager);
         setJMenuBar(menuBar);
 
-        MyToolBar toolBar = new MyToolBar();
+        MyToolBar toolBar = new MyToolBar(actionManager);
         add(toolBar, BorderLayout.NORTH);
 
         JTree projectExplorer = draftTree.generateTree(new ProjectExplorer("Project Explorer", "a"));
@@ -56,6 +57,8 @@ public class MainFrame extends JFrame {
         getContentPane().add(split,BorderLayout.CENTER);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
+
+
     }
 
 
@@ -81,18 +84,11 @@ public class MainFrame extends JFrame {
         return draftTree;
     }
 
-    public void setDraftTree(DraftTree draftTree) {
-        this.draftTree = draftTree;
+    public DraftTabs getTabs() {
+        return tabs;
     }
 
-
-    public JPanel getDesktop() {
-        return desktop;
+    public ActionManager getActionManager() {
+        return actionManager;
     }
-
-    public void setDesktop(DraftPanel desktop) {
-        this.desktop = desktop;
-    }
-
-
 }
