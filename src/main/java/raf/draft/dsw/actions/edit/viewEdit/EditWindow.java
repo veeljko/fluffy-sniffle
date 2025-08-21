@@ -49,7 +49,7 @@ public class EditWindow {
         frame.add(inputPanel, BorderLayout.CENTER);
         frame.add(button, BorderLayout.SOUTH);
 
-        editButtonClick = new EditButtonClick(frame, input1, input2);
+        editButtonClick = new EditButtonClick(frame, input1);
 
         // Make the frame visible
         button.addActionListener(editButtonClick);
@@ -61,6 +61,12 @@ public class EditWindow {
 
     public JTextField getInput2() {
         return input2;
+    }
+
+    public void update(String nodeIme, String autor){
+        getInput1().setText(nodeIme);
+        getInput2().setText(autor);
+        getInput3().setText(nodeIme);
     }
 
     public EditButtonClick getEditButtonClick() {

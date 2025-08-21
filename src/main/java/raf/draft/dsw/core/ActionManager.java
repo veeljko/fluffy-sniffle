@@ -4,7 +4,7 @@ import raf.draft.dsw.actions.aboutus.AboutUsAction;
 import raf.draft.dsw.actions.DeleteAction;
 import raf.draft.dsw.actions.ExitAction;
 import raf.draft.dsw.actions.NewChildAction;
-import raf.draft.dsw.actions.edit.modelEdit.EditAction;
+import raf.draft.dsw.actions.edit.controllerEdit.EditAction;
 
 public class ActionManager {
     private ExitAction exitAction;

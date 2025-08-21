@@ -1,11 +1,12 @@
 package raf.draft.dsw.view;
 
+import raf.draft.dsw.SelectedNodeUpdate.ITreeSelectedNodeSubscriber;
 import raf.draft.dsw.JTabbePane.controller.DraftTabs;
 import raf.draft.dsw.JTabbePane.model.DraftPanel;
 import raf.draft.dsw.core.ActionManager;
 import raf.draft.dsw.jtree.DraftTree;
 import raf.draft.dsw.jtree.controller.DraftTreeImplementation;
-import raf.draft.dsw.jtree.model.DraftTreeItem;
+import raf.draft.dsw.jtree.controller.DraftTreeMouseListener;
 import raf.draft.dsw.jtree.model.implementation.ProjectExplorer;
 
 import javax.swing.*;
@@ -18,18 +19,19 @@ public class MainFrame extends JFrame {
     private DraftTree draftTree;
     private DraftTabs tabs;
     private DraftPanel desktop;
-    private DraftTreeItem lastSelectedProject;
 
 
     private MainFrame(){
-        this.draftTree = new DraftTreeImplementation();
         this.actionManager = new ActionManager();
+        this.draftTree = new DraftTreeImplementation();
         this.tabs = new DraftTabs();
         this.desktop = new DraftPanel(new BorderLayout());
 
-        lastSelectedProject = null;
-        tabs.setDesktop(desktop);
+        tabs.setDraftPanel(desktop);
         initialize();
+
+        addSubscriberToITree(actionManager.getEditAction());
+        ((DraftTreeImplementation)this.draftTree).getTreeView().addTreeSelectionListener(((DraftTreeImplementation)this.draftTree).getTreeView().getRuTreeSelectionListener());
     }
 
     private void initialize(){
@@ -49,7 +51,11 @@ public class MainFrame extends JFrame {
         add(toolBar, BorderLayout.NORTH);
 
         JTree projectExplorer = draftTree.generateTree(new ProjectExplorer("Project Explorer", "a"));
-        projectExplorer.addMouseListener(new DraftTreeMouseListener());
+        DraftTreeMouseListener draftTreeMouseListener = new DraftTreeMouseListener();
+        draftTreeMouseListener.getTmp().addSubscriber(tabs.getDraftPanel());
+
+        projectExplorer.addMouseListener(draftTreeMouseListener);
+
 
         JScrollPane scroll=new JScrollPane(projectExplorer);
         scroll.setMinimumSize(new Dimension(200,150));
@@ -57,17 +63,10 @@ public class MainFrame extends JFrame {
         getContentPane().add(split,BorderLayout.CENTER);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
-
-
     }
 
-
-    public void setLastSelectedProject(DraftTreeItem lastSelectedProject){
-        this.lastSelectedProject = lastSelectedProject;
-    }
-
-    public DraftTreeItem getLastSelectedProject(){
-        return lastSelectedProject;
+    private void addSubscriberToITree(ITreeSelectedNodeSubscriber subscriber){
+        ((DraftTreeImplementation)this.draftTree).getTreeView().getRuTreeSelectionListener().addSubscriber(subscriber);
     }
 
     public static MainFrame getInstance(){

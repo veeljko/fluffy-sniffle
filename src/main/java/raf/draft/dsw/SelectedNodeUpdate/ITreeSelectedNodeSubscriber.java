@@ -1,4 +1,4 @@
-package SelectedNodeUpdate;
+package raf.draft.dsw.SelectedNodeUpdate;
 
 import raf.draft.dsw.jtree.model.DraftTreeItem;
 

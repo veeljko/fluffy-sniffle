@@ -1,7 +1,7 @@
 package raf.draft.dsw.jtree.controller;
 
-import SelectedNodeUpdate.ITreeSelectedNodePublisher;
-import SelectedNodeUpdate.ITreeSelectedNodeSubscriber;
+import raf.draft.dsw.SelectedNodeUpdate.ITreeSelectedNodePublisher;
+import raf.draft.dsw.SelectedNodeUpdate.ITreeSelectedNodeSubscriber;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
 
 import javax.swing.event.TreeSelectionEvent;

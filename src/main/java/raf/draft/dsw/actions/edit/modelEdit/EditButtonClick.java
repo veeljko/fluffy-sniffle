@@ -12,28 +12,28 @@ import java.awt.event.ActionListener;
 
 public class EditButtonClick implements ActionListener {
     private JFrame frame;
-    private JTextField input1, input2;
+    private JTextField input1;
 
-    public EditButtonClick(JFrame frame, JTextField input1, JTextField input2) {
+    public EditButtonClick(JFrame frame, JTextField input1) {
         this.frame = frame;
         this.input1 = input1;
-        this.input2 = input2;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         DraftTreeItem lastClickedNode = MainFrame.getInstance().getDraftTree().getSelectedNode();
-        //System.out.println("Button was clicked!");
         if (lastClickedNode != null) {
             MainFrame.getInstance().getTabs().getPanelView().changeTabName(lastClickedNode.getDraftNode().getNodeIme(), input1.getText());
             lastClickedNode.getDraftNode().setNodeIme(input1.getText());
         }
 
+        refresh();
+        frame.dispose();
+    }
 
+    public void refresh(){
         DraftTreeView treeView = ((DraftTreeImplementation) MainFrame.getInstance().getDraftTree()).getTreeView();
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
-        frame.dispose();
-
     }
 }

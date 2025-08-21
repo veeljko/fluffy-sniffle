@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DraftTabs extends JTabbedPane {
-    private DraftPanel desktop;
+    private DraftPanel draftPanel;
     private DraftPanelView panelView;
 
     public DraftTabs() {
@@ -16,18 +16,24 @@ public class DraftTabs extends JTabbedPane {
     }
 
     public void initialize(){
-        setSize(desktop.getMaximumSize());
-        desktop.add(this, BorderLayout.CENTER);
-        desktop.setVisible(true);
+        setSize(draftPanel.getMaximumSize());
+        draftPanel.add(this, BorderLayout.CENTER);
+        draftPanel.setVisible(true);
     }
 
-    public void setDesktop(DraftPanel desktop) {
-        this.desktop = desktop;
+    public void setDraftPanel(DraftPanel draftPanel) {
+        this.draftPanel = draftPanel;
         initialize();
     }
 
     public DraftPanelView getPanelView() {
         return panelView;
     }
+
+    public DraftPanel getDraftPanel() {
+        return draftPanel;
+    }
+
+
 
 }

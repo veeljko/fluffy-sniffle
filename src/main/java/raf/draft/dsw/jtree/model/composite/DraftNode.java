@@ -1,6 +1,4 @@
 package raf.draft.dsw.jtree.model.composite;
-
-import java.nio.file.Path;
 import java.util.Objects;
 
 public abstract class DraftNode {

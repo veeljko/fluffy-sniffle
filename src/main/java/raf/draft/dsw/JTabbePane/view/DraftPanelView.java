@@ -1,8 +1,10 @@
 package raf.draft.dsw.JTabbePane.view;
 
+import com.sun.tools.javac.Main;
 import raf.draft.dsw.JTabbePane.controller.DraftTabs;
 import raf.draft.dsw.JTabbePane.model.DraftPanel;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
+import raf.draft.dsw.view.MainFrame;
 
 import java.util.List;
 
@@ -41,4 +43,17 @@ public class DraftPanelView {
         if (index != -1) draftTabs.setBackgroundAt(index, tab.getColor());
     }
 
+    public void addTab(DraftTreeItem childWrapper){
+        DraftTreeItem parent = (DraftTreeItem) childWrapper.getParent();
+        DraftPanel component = new DraftPanel(parent, childWrapper.getDraftNode().getNodeIme());
+
+        int index = draftTabs.getDraftPanel().getIndexOfPanelToInsert(parent);
+        draftTabs.insertTab(childWrapper.getDraftNode().getNodeIme(), null, component, null, index);
+        setTabColor(component);
+    }
+
+    public void removeTab(DraftTreeItem child){
+        int index = draftTabs.indexOfTab(child.getDraftNode().getNodeIme());
+        if (index != -1) draftTabs.remove(index);
+    }
 }
