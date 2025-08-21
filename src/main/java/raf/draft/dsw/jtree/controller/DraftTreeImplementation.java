@@ -3,8 +3,8 @@ package raf.draft.dsw.jtree.controller;
 import raf.draft.dsw.JTabbePane.model.DraftPanel;
 import raf.draft.dsw.JTabbePane.view.DraftPanelView;
 import raf.draft.dsw.jtree.DraftTree;
-import raf.draft.dsw.jtree.model.composite.DraftNode;
-import raf.draft.dsw.jtree.model.composite.DraftNodeComposite;
+import raf.draft.dsw.jtree.model.draftnodefactory.DraftNodeChildFactory;
+import raf.draft.dsw.jtree.model.draftnodefactory.DraftNodeFactory;
 import raf.draft.dsw.jtree.model.implementation.Building;
 import raf.draft.dsw.jtree.model.implementation.Project;
 import raf.draft.dsw.jtree.model.implementation.ProjectExplorer;
@@ -29,22 +29,17 @@ public class DraftTreeImplementation implements DraftTree {
         return treeView;
     }
 
-    public DraftTreeView getTreeView() {
-        return treeView;
-    }
-
     @Override
     public void addChild(DraftTreeItem parent) {
-        if (!(parent.getDraftNode() instanceof DraftNodeComposite)){
+        DraftNodeFactory draftNodeFactory = new DraftNodeChildFactory(parent);
+        DraftTreeItem childWrapper = draftNodeFactory.createDraftNode();
+
+        if (childWrapper == null){
             System.err.println("Room ne moze da ima child");
             return;
         }
 
-        DraftNode child = createChild(parent.getDraftNode());
-        DraftTreeItem childWrapper = new DraftTreeItem(child);
-        parent.add(childWrapper);
-
-        if (parent.getDraftNode().getParent() instanceof Project && child instanceof Room){
+        if (parent.getDraftNode().getParent() instanceof Project && childWrapper.getDraftNode() instanceof Room){
             MainFrame frame = MainFrame.getInstance();
             DraftPanelView draftPanelView = MainFrame.getInstance().getTabs().getPanelView();
             DraftTreeItem lastSelectedProject = MainFrame.getInstance().getLastSelectedProject();
@@ -63,11 +58,14 @@ public class DraftTreeImplementation implements DraftTree {
             }
         }
 
-        ((DraftNodeComposite) parent.getDraftNode()).addChild(child);
+        //((DraftNodeComposite) parent.getDraftNode()).addChild(childWrapper.getDraftNode());
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
     }
 
+    public DraftTreeView getTreeView() {
+        return treeView;
+    }
 
     @Override
     public DraftTreeItem getSelectedNode() {
@@ -77,8 +75,6 @@ public class DraftTreeImplementation implements DraftTree {
     @Override
     public void deleteChild(DraftTreeItem parent, int childIndex) {
         DraftTreeItem child = (DraftTreeItem) parent.getChildAt(childIndex);
-
-        ((DraftNodeComposite) parent.getDraftNode()).removeChild(child.getDraftNode());
         parent.remove(childIndex);
 
         int index = MainFrame.getInstance().getTabs().indexOfTab(child.getDraftNode().getNodeIme());
@@ -86,15 +82,5 @@ public class DraftTreeImplementation implements DraftTree {
 
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
-    }
-
-    private DraftNode createChild(DraftNode parent) {
-        if (parent instanceof ProjectExplorer)
-            return  new Project("Project" + cnt++, parent, "a");
-        if (parent instanceof Project)
-            return new Building("Building" + cnt++, parent, "a");
-        if (parent instanceof Building)
-            return new Room("Room" + cnt++, parent,"a");
-        return null;
     }
 }
