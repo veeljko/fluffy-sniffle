@@ -1,6 +1,9 @@
 package raf.draft.dsw.actions.edit.modelEdit;
 
+import com.sun.tools.javac.Main;
+import raf.draft.dsw.jtree.controller.DraftTreeImplementation;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
+import raf.draft.dsw.jtree.view.DraftTreeView;
 import raf.draft.dsw.view.MainFrame;
 
 import javax.swing.*;
@@ -25,6 +28,11 @@ public class EditButtonClick implements ActionListener {
             MainFrame.getInstance().getTabs().getPanelView().changeTabName(lastClickedNode.getDraftNode().getNodeIme(), input1.getText());
             lastClickedNode.getDraftNode().setNodeIme(input1.getText());
         }
+
+
+        DraftTreeView treeView = ((DraftTreeImplementation) MainFrame.getInstance().getDraftTree()).getTreeView();
+        treeView.expandPath(treeView.getSelectionPath());
+        SwingUtilities.updateComponentTreeUI(treeView);
         frame.dispose();
 
     }
