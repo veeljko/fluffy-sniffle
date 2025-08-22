@@ -1,8 +1,7 @@
 package raf.draft.dsw.view;
 
+import raf.draft.dsw.JTabbePane.controller.DraftTabController;
 import raf.draft.dsw.SelectedNodeUpdate.ITreeSelectedNodeSubscriber;
-import raf.draft.dsw.JTabbePane.controller.DraftTabs;
-import raf.draft.dsw.JTabbePane.model.DraftPanel;
 import raf.draft.dsw.core.ActionManager;
 import raf.draft.dsw.jtree.DraftTree;
 import raf.draft.dsw.jtree.controller.DraftTreeImplementation;
@@ -17,20 +16,15 @@ public class MainFrame extends JFrame {
     private static MainFrame instance = null;
     private ActionManager actionManager;
     private DraftTree draftTree;
-    private DraftTabs tabs;
-    private DraftPanel desktop;
+    private DraftTabController tabs;
 
 
     private MainFrame(){
         this.actionManager = new ActionManager();
         this.draftTree = new DraftTreeImplementation();
-        this.tabs = new DraftTabs();
-        this.desktop = new DraftPanel(new BorderLayout());
+        this.tabs = new DraftTabController();
 
-        tabs.setDraftPanel(desktop);
         initialize();
-
-
 
         addSubscriberToITree(actionManager.getEditAction());
         ((DraftTreeImplementation)this.draftTree).getTreeView().addTreeSelectionListener(((DraftTreeImplementation)this.draftTree).getTreeView().getRuTreeSelectionListener());
@@ -61,7 +55,7 @@ public class MainFrame extends JFrame {
 
         JScrollPane scroll=new JScrollPane(projectExplorer);
         scroll.setMinimumSize(new Dimension(200,150));
-        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
+        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,tabs.getDraftTabs());
         getContentPane().add(split,BorderLayout.CENTER);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
@@ -85,7 +79,7 @@ public class MainFrame extends JFrame {
         return draftTree;
     }
 
-    public DraftTabs getTabs() {
+    public DraftTabController getTabs() {
         return tabs;
     }
 

@@ -22,7 +22,7 @@ public class ApplicationFramework {
         this.mainFrame = mainFrame;
 
         IDaftNodeChangePublisher publisher = mainFrame.getActionManager().getEditAction().getEditWindow().getEditButtonClick();
-        IDraftNodeChangeSubscriber sub1 = mainFrame.getTabs();
+        IDraftNodeChangeSubscriber sub1 = mainFrame.getTabs().getDraftTabs();
         IDraftNodeChangeSubscriber sub2 = (DraftTreeImplementation) mainFrame.getDraftTree();
         publisher.addSubscriber(sub1);
         publisher.addSubscriber(sub2);

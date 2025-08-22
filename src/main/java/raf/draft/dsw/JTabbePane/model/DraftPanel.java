@@ -1,7 +1,7 @@
 package raf.draft.dsw.JTabbePane.model;
 
 import raf.draft.dsw.SelectedNodeUpdate.ITreeSelectedNodeSubscriber;
-import raf.draft.dsw.JTabbePane.controller.DraftTabs;
+import raf.draft.dsw.JTabbePane.view.DraftTabs;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
 import raf.draft.dsw.jtree.model.implementation.Building;
 import raf.draft.dsw.jtree.model.implementation.ProjectExplorer;
@@ -10,20 +10,10 @@ import raf.draft.dsw.view.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Objects;
 
 public class DraftPanel extends JPanel implements ITreeSelectedNodeSubscriber {
-    private String ime;
-    private Color color;
     private DraftTreeItem lastSelectedProject;
-    private DraftTreeItem tabParent;
 
-    public DraftPanel(DraftTreeItem parent, String ime) {
-        tabParent = parent;
-        this.ime = ime;
-        if (parent.getDraftNode() instanceof Building) this.color = ((Building) parent.getDraftNode()).getColor();
-        else this.color = Color.BLACK;
-    }
 
     public DraftPanel(BorderLayout borderLayout) {
         super(borderLayout);
@@ -61,39 +51,15 @@ public class DraftPanel extends JPanel implements ITreeSelectedNodeSubscriber {
             });
             return tmp.index;
         }
-        DraftTabs draftTabs = MainFrame.getInstance().getTabs();
+        DraftTabs draftTabs = MainFrame.getInstance().getTabs().getDraftTabs();
         DraftTreeItem lastChild = parent.getLeafs().get(childCount - 2);
         int index = draftTabs.indexOfTab(lastChild.getDraftNode().getNodeIme());
         return index + 1;
     }
 
-    public String getIme() {
-        return ime;
-    }
-
-    public Color getColor(){
-        return color;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DraftPanel that = (DraftPanel) o;
-        return ime.equals(that.ime) && color.equals(that.color);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(ime, color);
-    }
 
     @Override
     public void update(DraftTreeItem node) {
         lastSelectedProject = node;
-    }
-
-    public DraftTreeItem getTabParent() {
-        return tabParent;
     }
 }

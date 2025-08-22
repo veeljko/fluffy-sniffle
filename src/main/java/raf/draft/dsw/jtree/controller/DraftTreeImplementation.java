@@ -28,7 +28,7 @@ public class DraftTreeImplementation implements DraftTree, IDraftNodeChangeSubsc
         DraftTreeItem childWrapper = draftNodeFactory.createDraftNode();
 
         if (MainFrame.getInstance().getTabs().getDraftPanel().isAddable(childWrapper)){
-            MainFrame.getInstance().getTabs().getPanelView().addTab(childWrapper);
+            MainFrame.getInstance().getTabs().addTab(childWrapper);
         }
 
         refresh();
@@ -47,7 +47,7 @@ public class DraftTreeImplementation implements DraftTree, IDraftNodeChangeSubsc
     public void deleteChild(DraftTreeItem parent, int childIndex) {
         DraftTreeItem child = (DraftTreeItem) parent.getChildAt(childIndex);
         parent.remove(childIndex);
-        MainFrame.getInstance().getTabs().getPanelView().removeTab(child);
+        MainFrame.getInstance().getTabs().getDraftTabs().removeTab(child);
         refresh();
     }
 

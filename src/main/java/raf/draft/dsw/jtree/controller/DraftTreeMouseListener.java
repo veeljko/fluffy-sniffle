@@ -1,8 +1,8 @@
 package raf.draft.dsw.jtree.controller;
 
+import raf.draft.dsw.JTabbePane.view.DraftTabs;
 import raf.draft.dsw.SelectedNodeUpdate.ITreeSelectedNodePublisher;
 import raf.draft.dsw.SelectedNodeUpdate.ITreeSelectedNodeSubscriber;
-import raf.draft.dsw.JTabbePane.view.DraftPanelView;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
 import raf.draft.dsw.view.MainFrame;
 
@@ -22,8 +22,8 @@ public class DraftTreeMouseListener extends MouseAdapter {
             tmp.setLastSelectedForShowing(lastSelectedForShowing);
             tmp.notifySubscribers();
 
-            DraftPanelView draftPanelView = frame.getTabs().getPanelView();
-            draftPanelView.addTabs(lastSelectedForShowing.getLeafs());
+            DraftTabs draftTabs = frame.getTabs().getDraftTabs();
+            draftTabs.addTabs(lastSelectedForShowing.getLeafs());
         }
     }
 
