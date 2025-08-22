@@ -2,6 +2,10 @@ package raf.draft.dsw.JTabbePane.model;
 
 import raf.draft.dsw.SelectedNodeUpdate.ITreeSelectedNodeSubscriber;
 import raf.draft.dsw.JTabbePane.view.DraftTabs;
+import raf.draft.dsw.errorhandler.Greska;
+import raf.draft.dsw.errorhandler.Logger;
+import raf.draft.dsw.errorhandler.controller.LoggerFactory;
+import raf.draft.dsw.errorhandler.model.MessageGenerator;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
 import raf.draft.dsw.jtree.model.implementation.Building;
 import raf.draft.dsw.jtree.model.implementation.ProjectExplorer;
@@ -10,6 +14,7 @@ import raf.draft.dsw.view.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Date;
 
 public class DraftPanel extends JPanel implements ITreeSelectedNodeSubscriber {
     private DraftTreeItem lastSelectedProject;
@@ -22,7 +27,9 @@ public class DraftPanel extends JPanel implements ITreeSelectedNodeSubscriber {
     public boolean isAddable(DraftTreeItem childWrapper){
         if (childWrapper == null) return false;
 
-        if (!(childWrapper.getDraftNode() instanceof Room) || lastSelectedProject == null) return false;
+        if (!(childWrapper.getDraftNode() instanceof Room)) return false;
+        if (lastSelectedProject == null) return false;
+
 
         DraftTreeItem parent = (DraftTreeItem) childWrapper.getParent();
         if (lastSelectedProject.getDraftNode() instanceof ProjectExplorer) return false;

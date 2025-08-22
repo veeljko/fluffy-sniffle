@@ -1,4 +1,4 @@
-package raf.draft.dsw.JTabbePane.view;
+package raf.draft.dsw.JTabbePane.view.windowImplementation;
 
 import javax.swing.*;
 import java.awt.*;

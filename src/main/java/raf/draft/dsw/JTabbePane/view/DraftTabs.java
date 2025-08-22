@@ -2,11 +2,17 @@ package raf.draft.dsw.JTabbePane.view;
 
 import raf.draft.dsw.DraftNodeChangeUpdate.IDraftNodeChangeSubscriber;
 import raf.draft.dsw.JTabbePane.model.DraftPanel;
+import raf.draft.dsw.JTabbePane.view.windowImplementation.DraftTabWindow;
+import raf.draft.dsw.errorhandler.Greska;
+import raf.draft.dsw.errorhandler.Logger;
+import raf.draft.dsw.errorhandler.controller.LoggerFactory;
+import raf.draft.dsw.errorhandler.model.MessageGenerator;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
 import raf.draft.dsw.jtree.model.implementation.Building;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Date;
 import java.util.List;
 
 public class DraftTabs extends JTabbedPane implements IDraftNodeChangeSubscriber {
@@ -68,11 +74,21 @@ public class DraftTabs extends JTabbedPane implements IDraftNodeChangeSubscriber
     public void changeTabName(String oldName, String newName){
         int index = indexOfTab(oldName);
         if (index != -1) setTitleAt(index, newName);
+        else{
+            MessageGenerator newMessage = new MessageGenerator("Can't find tab to change name", Greska.UPOZORENJE, new Date());
+            Logger logger = new LoggerFactory().createLogger("consolelogger");
+            logger.log(newMessage.toString());
+        }
     }
 
     private void setTabColor(DraftTabWindow tab){
         int index = indexOfTab(tab.getTabName());
         if (index != -1) setBackgroundAt(index, tab.getColor());
+        else{
+            MessageGenerator newMessage = new MessageGenerator("Can't find tab to change color", Greska.UPOZORENJE, new Date());
+            Logger logger = new LoggerFactory().createLogger("consolelogger");
+            logger.log(newMessage.toString());
+        }
     }
 
     public void addTab(DraftTreeItem childWrapper, int index){

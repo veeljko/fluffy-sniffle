@@ -1,6 +1,10 @@
 package raf.draft.dsw.actions;
 
 import raf.draft.dsw.actions.model.AbstractRoomAction;
+import raf.draft.dsw.errorhandler.Greska;
+import raf.draft.dsw.errorhandler.Logger;
+import raf.draft.dsw.errorhandler.controller.LoggerFactory;
+import raf.draft.dsw.errorhandler.model.MessageGenerator;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
 import raf.draft.dsw.jtree.model.implementation.Room;
 import raf.draft.dsw.view.MainFrame;
@@ -11,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 public class DeleteAction extends AbstractRoomAction {
 
@@ -34,7 +39,12 @@ public class DeleteAction extends AbstractRoomAction {
 
     public void actionPerformed(ActionEvent arg0) {
         DraftTreeItem selected = MainFrame.getInstance().getMapTree().getSelectedNode();
-        if (selected.getParent() == null) return;
+        if (selected.getParent() == null) {
+            MessageGenerator newMessage = new MessageGenerator("Can't delete root of file", Greska.UPOZORENJE, new Date());
+            Logger logger = new LoggerFactory().createLogger("consolelogger");
+            logger.log(newMessage.toString());
+            return;
+        }
         ArrayList<DraftTreeItem> childs = new ArrayList<>();
         dfs(selected, childs);
         for (DraftTreeItem child : childs) {

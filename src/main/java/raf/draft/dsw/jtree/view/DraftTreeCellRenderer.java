@@ -1,5 +1,9 @@
 package raf.draft.dsw.jtree.view;
 
+import raf.draft.dsw.errorhandler.Greska;
+import raf.draft.dsw.errorhandler.Logger;
+import raf.draft.dsw.errorhandler.controller.LoggerFactory;
+import raf.draft.dsw.errorhandler.model.MessageGenerator;
 import raf.draft.dsw.jtree.model.implementation.Project;
 import raf.draft.dsw.jtree.model.implementation.ProjectExplorer;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
@@ -8,6 +12,7 @@ import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import java.awt.*;
 import java.net.URL;
+import java.util.Date;
 
 public class DraftTreeCellRenderer extends DefaultTreeCellRenderer {
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
