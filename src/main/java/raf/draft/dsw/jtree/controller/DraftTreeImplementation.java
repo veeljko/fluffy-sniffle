@@ -1,5 +1,6 @@
 package raf.draft.dsw.jtree.controller;
 
+import raf.draft.dsw.DraftNodeChangeUpdate.IDraftNodeChangeSubscriber;
 import raf.draft.dsw.jtree.DraftTree;
 import raf.draft.dsw.jtree.model.draftnodefactory.DraftNodeChildFactory;
 import raf.draft.dsw.jtree.model.draftnodefactory.DraftNodeFactory;
@@ -7,11 +8,9 @@ import raf.draft.dsw.jtree.model.implementation.ProjectExplorer;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
 import raf.draft.dsw.jtree.view.DraftTreeView;
 import raf.draft.dsw.view.MainFrame;
-
-import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
 
-public class DraftTreeImplementation implements DraftTree {
+public class DraftTreeImplementation implements DraftTree, IDraftNodeChangeSubscriber {
     private DraftTreeView treeView;
     private DefaultTreeModel treeModel;
 
@@ -52,8 +51,12 @@ public class DraftTreeImplementation implements DraftTree {
         refresh();
     }
 
-    private void refresh(){
-        treeView.expandPath(treeView.getSelectionPath());
-        SwingUtilities.updateComponentTreeUI(treeView);
+    @Override
+    public void update(String oldName, String newName, String newAutor) {
+        getSelectedNode().setName(newName);
+        getSelectedNode().setAutor(newAutor);
+
+        refresh();
     }
+
 }

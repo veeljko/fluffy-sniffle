@@ -49,7 +49,7 @@ public class EditWindow {
         frame.add(inputPanel, BorderLayout.CENTER);
         frame.add(button, BorderLayout.SOUTH);
 
-        editButtonClick = new EditButtonClick(frame, input1);
+        editButtonClick = new EditButtonClick(frame, input1, input2);
 
         // Make the frame visible
         button.addActionListener(editButtonClick);

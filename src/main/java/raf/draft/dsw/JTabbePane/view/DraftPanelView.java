@@ -4,8 +4,6 @@ import com.sun.tools.javac.Main;
 import raf.draft.dsw.JTabbePane.controller.DraftTabs;
 import raf.draft.dsw.JTabbePane.model.DraftPanel;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
-import raf.draft.dsw.view.MainFrame;
-
 import java.util.List;
 
 public class DraftPanelView {

@@ -30,6 +30,8 @@ public class MainFrame extends JFrame {
         tabs.setDraftPanel(desktop);
         initialize();
 
+
+
         addSubscriberToITree(actionManager.getEditAction());
         ((DraftTreeImplementation)this.draftTree).getTreeView().addTreeSelectionListener(((DraftTreeImplementation)this.draftTree).getTreeView().getRuTreeSelectionListener());
     }

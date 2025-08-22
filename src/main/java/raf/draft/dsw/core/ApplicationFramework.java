@@ -1,9 +1,14 @@
 package raf.draft.dsw.core;
 
+import raf.draft.dsw.DraftNodeChangeUpdate.IDaftNodeChangePublisher;
+import raf.draft.dsw.DraftNodeChangeUpdate.IDraftNodeChangeSubscriber;
+import raf.draft.dsw.SelectedNodeUpdate.ITreeSelectedNodePublisher;
+import raf.draft.dsw.actions.edit.modelEdit.EditButtonClick;
 import raf.draft.dsw.errorhandler.view.ConsoleLogger;
 import raf.draft.dsw.errorhandler.view.FileLogger;
 import raf.draft.dsw.errorhandler.controller.LoggerFactory;
 import raf.draft.dsw.errorhandler.model.MessageGenerator;
+import raf.draft.dsw.jtree.controller.DraftTreeImplementation;
 import raf.draft.dsw.view.MainFrame;
 
 public class ApplicationFramework {
@@ -15,6 +20,13 @@ public class ApplicationFramework {
 
     public ApplicationFramework(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
+
+        IDaftNodeChangePublisher publisher = mainFrame.getActionManager().getEditAction().getEditWindow().getEditButtonClick();
+        IDraftNodeChangeSubscriber sub1 = mainFrame.getTabs();
+        IDraftNodeChangeSubscriber sub2 = (DraftTreeImplementation) mainFrame.getDraftTree();
+        publisher.addSubscriber(sub1);
+        publisher.addSubscriber(sub2);
+
         initialize();
     }
 
