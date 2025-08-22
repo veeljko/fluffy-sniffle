@@ -1,11 +1,17 @@
 package raf.draft.dsw.jtree.model.draftnodefactory;
 
+import raf.draft.dsw.errorhandler.Greska;
+import raf.draft.dsw.errorhandler.Logger;
+import raf.draft.dsw.errorhandler.controller.LoggerFactory;
+import raf.draft.dsw.errorhandler.model.MessageGenerator;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
 import raf.draft.dsw.jtree.model.composite.DraftNode;
 import raf.draft.dsw.jtree.model.implementation.Building;
 import raf.draft.dsw.jtree.model.implementation.Project;
 import raf.draft.dsw.jtree.model.implementation.ProjectExplorer;
 import raf.draft.dsw.jtree.model.implementation.Room;
+
+import java.util.Date;
 
 public class DraftNodeChildFactory extends DraftNodeFactory{
 
@@ -23,7 +29,12 @@ public class DraftNodeChildFactory extends DraftNodeFactory{
             child = new Building("Building" + getCnt(), parent, "autor");
         else if (parent instanceof Building)
             child = new Room("Room" + getCnt(), parent, "autor");
-        else return null;
+        else {
+            MessageGenerator newMessage = new MessageGenerator("Room can't have any children", Greska.GRESKA, new Date());
+            Logger logger = new LoggerFactory().createLogger("consolelogger");
+            logger.log(newMessage.toString());
+            return null;
+        }
 
         DraftTreeItem childWrapper = new DraftTreeItem(child);
         super.getParent().add(childWrapper);

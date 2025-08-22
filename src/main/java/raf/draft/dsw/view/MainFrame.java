@@ -1,11 +1,11 @@
 package raf.draft.dsw.view;
 
-import raf.draft.dsw.JTabbePane.controller.DraftTabs;
-import raf.draft.dsw.JTabbePane.model.DraftPanel;
+import raf.draft.dsw.JTabbePane.controller.DraftTabController;
+import raf.draft.dsw.SelectedNodeUpdate.ITreeSelectedNodeSubscriber;
 import raf.draft.dsw.core.ActionManager;
 import raf.draft.dsw.jtree.DraftTree;
 import raf.draft.dsw.jtree.controller.DraftTreeImplementation;
-import raf.draft.dsw.jtree.model.DraftTreeItem;
+import raf.draft.dsw.jtree.controller.DraftTreeMouseListener;
 import raf.draft.dsw.jtree.model.implementation.ProjectExplorer;
 
 import javax.swing.*;
@@ -16,20 +16,18 @@ public class MainFrame extends JFrame {
     private static MainFrame instance = null;
     private ActionManager actionManager;
     private DraftTree draftTree;
-    private DraftTabs tabs;
-    private DraftPanel desktop;
-    private DraftTreeItem lastSelectedProject;
+    private DraftTabController tabs;
 
 
     private MainFrame(){
-        this.draftTree = new DraftTreeImplementation();
         this.actionManager = new ActionManager();
-        this.tabs = new DraftTabs();
-        this.desktop = new DraftPanel(new BorderLayout());
+        this.draftTree = new DraftTreeImplementation();
+        this.tabs = new DraftTabController();
 
-        lastSelectedProject = null;
-        tabs.setDesktop(desktop);
         initialize();
+
+        addSubscriberToITree(actionManager.getEditAction());
+        ((DraftTreeImplementation)this.draftTree).getTreeView().addTreeSelectionListener(((DraftTreeImplementation)this.draftTree).getTreeView().getRuTreeSelectionListener());
     }
 
     private void initialize(){
@@ -49,25 +47,22 @@ public class MainFrame extends JFrame {
         add(toolBar, BorderLayout.NORTH);
 
         JTree projectExplorer = draftTree.generateTree(new ProjectExplorer("Project Explorer", "a"));
-        projectExplorer.addMouseListener(new DraftTreeMouseListener());
+        DraftTreeMouseListener draftTreeMouseListener = new DraftTreeMouseListener();
+        draftTreeMouseListener.getTmp().addSubscriber(tabs.getDraftPanel());
+
+        projectExplorer.addMouseListener(draftTreeMouseListener);
+
 
         JScrollPane scroll=new JScrollPane(projectExplorer);
         scroll.setMinimumSize(new Dimension(200,150));
-        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
+        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,tabs.getDraftTabs());
         getContentPane().add(split,BorderLayout.CENTER);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
-
-
     }
 
-
-    public void setLastSelectedProject(DraftTreeItem lastSelectedProject){
-        this.lastSelectedProject = lastSelectedProject;
-    }
-
-    public DraftTreeItem getLastSelectedProject(){
-        return lastSelectedProject;
+    private void addSubscriberToITree(ITreeSelectedNodeSubscriber subscriber){
+        ((DraftTreeImplementation)this.draftTree).getTreeView().getRuTreeSelectionListener().addSubscriber(subscriber);
     }
 
     public static MainFrame getInstance(){
@@ -84,7 +79,7 @@ public class MainFrame extends JFrame {
         return draftTree;
     }
 
-    public DraftTabs getTabs() {
+    public DraftTabController getTabs() {
         return tabs;
     }
 

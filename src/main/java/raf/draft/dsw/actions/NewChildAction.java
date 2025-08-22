@@ -1,6 +1,7 @@
 package raf.draft.dsw.actions;
 
 import raf.draft.dsw.actions.model.AbstractRoomAction;
+import raf.draft.dsw.jtree.controller.DraftTreeImplementation;
 import raf.draft.dsw.jtree.model.DraftTreeItem;
 import raf.draft.dsw.view.MainFrame;
 
@@ -19,7 +20,7 @@ public class NewChildAction extends AbstractRoomAction {
     }
 
     public void actionPerformed(ActionEvent arg0) {
-        DraftTreeItem selected = (DraftTreeItem) MainFrame.getInstance().getMapTree().getSelectedNode();
-        MainFrame.getInstance().getMapTree().addChild(selected);
+        DraftTreeItem selected = MainFrame.getInstance().getMapTree().getSelectedNode();
+        (MainFrame.getInstance().getMapTree()).addChild(selected);
     }
 }

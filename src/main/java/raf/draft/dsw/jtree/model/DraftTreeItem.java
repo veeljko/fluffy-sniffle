@@ -24,6 +24,10 @@ public class DraftTreeItem extends DefaultMutableTreeNode {
         this.draftNode.setIme(name);
     }
 
+    public void setAutor(String autor) {
+        this.draftNode.setAutor(autor);
+    }
+
     public DraftNode getDraftNode() {
         return draftNode;
     }
@@ -63,4 +67,6 @@ public class DraftTreeItem extends DefaultMutableTreeNode {
     public int hashCode() {
         return Objects.hashCode(draftNode);
     }
+
+
 }

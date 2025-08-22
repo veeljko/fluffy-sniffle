@@ -63,6 +63,12 @@ public class EditWindow {
         return input2;
     }
 
+    public void update(String nodeIme, String autor){
+        getInput1().setText(nodeIme);
+        getInput2().setText(autor);
+        getInput3().setText(nodeIme);
+    }
+
     public EditButtonClick getEditButtonClick() {
         return editButtonClick;
     }
