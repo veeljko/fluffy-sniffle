@@ -55,6 +55,12 @@ public class DraftTreeItem extends DefaultMutableTreeNode {
         return items;
     }
 
+    public void delete(){
+        DraftTreeItem parent = (DraftTreeItem) this.getParent();
+        int childIndex = parent.getIndex(this);
+        parent.remove(childIndex);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

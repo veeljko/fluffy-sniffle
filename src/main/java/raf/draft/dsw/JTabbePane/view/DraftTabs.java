@@ -42,10 +42,12 @@ public class DraftTabs extends JTabbedPane implements IDraftNodeChangeSubscriber
     public void update(String oldName, String newName, String newAutor) {
         changeTabName(oldName, newName);
         int index = indexOfTab(newName);
-        DraftTabWindow tabWindow = (DraftTabWindow) getComponentAt(index);
-        tabWindow.setLabelName(newName);
-        tabWindow.setLabelAutor(newAutor);
-        refresh();
+        if (index != -1) {
+            DraftTabWindow tabWindow = (DraftTabWindow) getComponentAt(index);
+            tabWindow.setLabelName(newName);
+            tabWindow.setLabelAutor(newAutor);
+            refresh();
+        }
     }
 
 

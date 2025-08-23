@@ -1,13 +1,11 @@
 package raf.draft.dsw.jtree.model.implementation;
 
 import raf.draft.dsw.jtree.model.composite.DraftNode;
-import raf.draft.dsw.jtree.model.composite.DraftNodeComposite;
 
 import java.awt.*;
-import java.nio.file.Path;
 import java.util.Random;
 
-public class Building extends DraftNodeComposite {
+public class Building extends DraftNode {
     private Color color;
 
     public Building(String nodeNaziv, String autor) {
